@@ -6,7 +6,7 @@ exec("pwd", (error, dir) => {
         return;
     }
 
-    const command = `ags -c ${dir.trim()}/dist/index.js`;
+    const command = `ags -c ${dir.trim()}/dist/Load.js`;
     console.log(`Starting AGS... (${command})`);
 
     exec(command, (error, stdout) => {

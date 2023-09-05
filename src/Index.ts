@@ -1,5 +1,6 @@
 import * as Eags from "eags";
 import { HyprlandWorkspaces } from "./widget/HyprlandWorkspaces.js";
+import { Loader } from "./Load.js";
 
 const window = (monitor: number) => Eags.Window({
     anchor: ["top", "left", "right"],
@@ -7,14 +8,19 @@ const window = (monitor: number) => Eags.Window({
     monitor,
     name: `window-${monitor}`,
     child: Eags.CenterBox({
-        startWidget: HyprlandWorkspaces(),
+        startWidget: HyprlandWorkspaces({
+            activeClassName: 'active',
+            populatedClassName: 'populated'
+        }),
         endWidget: Eags.Label({
-            label: "cool",
+            label: "cool beans",
             justification: "right"
         })
     })
 });
 
-export default {
-    windows: [window(0)]
+
+export default function start(loader: Loader) {
+    loader.loadSass("style.scss");
+    loader.loadWindows(window(0), window(1));
 }
