@@ -1,0 +1,4 @@
+{
+    "watch": ["dist"],
+    "exec": "npm run start"
+}
