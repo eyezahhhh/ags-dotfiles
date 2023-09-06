@@ -6,15 +6,16 @@ import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { cc } from '../Utils';
 
 /*
-    box.E-HyprlandWorkspaces-container
-    .<className> {
+    box
+      .E-HyprlandWorkspaces-container
+      .<className> {
         button
-            .E-HyprlandWorkspaces-button
-            .E-HyprlandWorkspaces-active
-            .E-HyprlandWorkspaces-populated
-            .<buttonClassName>
-            .<activeClassName>
-            .<populatedClassName> {}
+          .E-HyprlandWorkspaces-button
+          .E-HyprlandWorkspaces-active
+          .E-HyprlandWorkspaces-populated
+          .<buttonClassName>
+          .<activeClassName>
+          .<populatedClassName> {}
     }
 */
 

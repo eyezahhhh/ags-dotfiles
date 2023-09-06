@@ -53,3 +53,92 @@
         color: $foreground;
     }
 }
+
+
+.E-VirtualMachines {
+    background: $background;
+    padding: 5px;
+    border: $border-md solid $foreground-accent;
+    border-radius: $radius-lg;
+
+    .E-VirtualMachine {
+        margin: 5px;
+    }
+}
+
+
+.E-VirtualMachine {
+    background: $background;
+    padding: 10px;
+    border-radius: $radius-md;
+    border: $border-sm solid $foreground-accent;
+    color: $foreground;
+    min-width: 200px;
+
+    .E-VirtualMachine-icon {
+        margin-right: 10px;
+    }
+
+    .E-VirtualMachine-name {
+        font-size: 1.3rem;
+        font-weight: 500;
+    }
+
+    .E-VirtualMachine-status {
+        color: $foreground-accent;
+    }
+
+    .E-VirtualMachine-button {
+        font-family: 'Font Awesome 6 Free Solid';
+        background: $background;
+        color: $foreground;
+        border-radius: $radius-sm;
+        font-size: 1.4rem;
+
+        &:hover {
+            color: $foreground-accent;
+        }
+    }
+}
+
+
+
+
+.E-VolumeSlider {
+    contents {
+        trough {
+            background: #151112;
+            min-height: 1rem;
+            min-width: 1rem;
+            border-radius: 0.5rem;
+
+            slider {
+                all: unset;
+            }
+        
+            highlight {
+                background: #BB8F6E;
+                border-radius: 0.5rem;
+                border: none;
+                min-width: 1rem;
+                min-height: 1rem;
+            }
+        }
+    }
+
+    .E-VolumeSlider-label {
+        min-width: 45px;
+    }
+}
+
+
+.E-VolumeSliders {
+    background: $background;
+    padding: 10px;
+    border: $border-md solid $foreground-accent;
+    border-radius: $radius-lg;
+
+    .E-VolumeSliders-label {
+        margin-left: 0.5rem;
+    }
+}

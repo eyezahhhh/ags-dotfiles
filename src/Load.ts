@@ -18,7 +18,6 @@ export class Loader {
     loadSass(...filenames: string[]) {
         for (let filename of filenames) {
             const cmd = `npx sass --no-source-map ${filename} ${__dirname}/.css/${this.stylesheets++}.css`;
-            console.log(cmd);
             exec(cmd);
         }
     }

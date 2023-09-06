@@ -7,7 +7,7 @@ settings:
 dependencies:
   eags:
     specifier: github:eyezahhhh/eags
-    version: github.com/eyezahhhh/eags/0351d168abe2f8bf676b277d88674314203d5604
+    version: github.com/eyezahhhh/eags/27f139e5950859ffdc9fbaa376a5ea6592b21ecb
 
 devDependencies:
   '@types/node':
@@ -699,8 +699,8 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
 
-  github.com/eyezahhhh/eags/0351d168abe2f8bf676b277d88674314203d5604:
-    resolution: {tarball: https://codeload.github.com/eyezahhhh/eags/tar.gz/0351d168abe2f8bf676b277d88674314203d5604}
+  github.com/eyezahhhh/eags/27f139e5950859ffdc9fbaa376a5ea6592b21ecb:
+    resolution: {tarball: https://codeload.github.com/eyezahhhh/eags/tar.gz/27f139e5950859ffdc9fbaa376a5ea6592b21ecb}
     name: eags
     version: 0.0.1
     requiresBuild: true

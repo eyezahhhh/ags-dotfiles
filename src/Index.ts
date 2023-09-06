@@ -2,8 +2,10 @@ import * as Eags from "eags";
 import { HyprlandWorkspaces } from "./widget/HyprlandWorkspaces.js";
 import { Loader } from "./Load.js";
 import { DateTime } from "./widget/DateTime.js";
+import { VirtualMachines } from "./widget/VirtualMachines.js";
+import { VolumeSliders } from "./widget/VolumeSliders.js";
 
-const window = (monitor: number) => Eags.Window({
+const bar = (monitor: number) => Eags.Window({
     anchor: ["top", "left", "right"],
     exclusive: true,
     monitor,
@@ -26,8 +28,32 @@ const window = (monitor: number) => Eags.Window({
     })
 });
 
+const startMenu = (monitor: number) => Eags.Window({
+    anchor: ['top', 'right'],
+    monitor,
+    className: 'window',
+    margin: [10, 10, 0, 0],
+    child: Eags.Box({
+        vertical: true,
+        children: [
+            VirtualMachines({
+                filter: id => !id.endsWith('-template'),
+                props: {
+                    vertical: true
+                },
+                childProps: {
+                    icon: id => `/home/eyezah/.config/ags/assets/vms/${id}.png`
+                }
+            }),
+            VolumeSliders({
+                audioType: 'apps'
+            })
+        ]
+    })
+})
+
 
 export default function start(loader: Loader) {
     loader.loadSass("style/style.scss", "user.scss");
-    loader.loadWindows(window(0), window(1));
+    loader.loadWindows(bar(1), startMenu(0));
 }
