@@ -1,4 +1,4 @@
 {
-    "watch": ["dist", "style.scss"],
+    "watch": ["dist", "**/*.scss"],
     "exec": "npm run start"
 }

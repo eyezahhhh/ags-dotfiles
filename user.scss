@@ -1,0 +1,11 @@
+@import 'style/vars';
+
+.window {
+    background: transparent;
+}
+
+.bar {
+    background: $background-transparent;
+    margin: 20px 20px 0 20px;
+    border-radius: $radius-lg;
+}

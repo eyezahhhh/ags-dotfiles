@@ -9,7 +9,7 @@
     "start": "node start.js",
     "tsc-alias": "npx tsc replacer.ts --module commonjs --target es2017 && npx tsc-alias",
     "watch": "npm run build && npx tsc-watch --onSuccess \"npx tsc-alias\"",
-    "dev": "npx nodemon -V"
+    "dev": "npx nodemon -V -e js,ts,scss"
   },
   "author": "eyezah",
   "license": "MIT",

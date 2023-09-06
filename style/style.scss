@@ -1,0 +1,55 @@
+@import 'vars';
+
+.E-HyprlandWorkspaces {
+    padding: 0 10px;
+    background: $background;
+    border-radius: $radius-lg;
+
+    .E-HyprlandWorkspaces-button {
+        background: transparent;
+        color: $foreground;
+        opacity: 0.5;
+        font-weight: 500;
+        border: none;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        &.E-HyprlandWorkspaces-populated {
+            opacity: 1;
+
+            &:hover {
+                color: $foreground-focus;
+            }
+        }
+
+        &.E-HyprlandWorkspaces-active {
+            color: $foreground-accent;
+
+            &:hover {
+                color: $foreground-accent;
+            }
+        }
+    }
+}
+
+
+.E-DateTime {
+    padding: 0 20px;
+    background: $background;
+    border-radius: $radius-lg;
+    font-family: $font-monospace;
+    font-weight: 600;
+
+    font-size: calc(1rem * $font-monospace-size-multiplier);
+
+    .E-DateTime-time {
+        margin-right: 10px;
+        color: $foreground-accent;
+    }
+
+    .E-DateTime-date {
+        color: $foreground;
+    }
+}

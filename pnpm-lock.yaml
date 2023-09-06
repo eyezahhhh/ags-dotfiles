@@ -7,7 +7,7 @@ settings:
 dependencies:
   eags:
     specifier: github:eyezahhhh/eags
-    version: github.com/eyezahhhh/eags/4f5fcfc06fd1853ded6b6781d77ed53331556bba
+    version: github.com/eyezahhhh/eags/0351d168abe2f8bf676b277d88674314203d5604
 
 devDependencies:
   '@types/node':
@@ -19,6 +19,9 @@ devDependencies:
   rimraf:
     specifier: ^5.0.1
     version: 5.0.1
+  sass:
+    specifier: ^1.66.1
+    version: 1.66.1
   tsc-alias:
     specifier: ^1.8.7
     version: 1.8.7
@@ -307,6 +310,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immutable@4.3.4:
+    resolution: {integrity: sha512-fsXeu4J4i6WNWSikpI88v/PcVflZz+6kMhUfIwc5SY+poQRPnaf5V7qds6SUyUN3cVxEzuCab7QIoLOQ+DQ1wA==}
+    dev: true
+
   /is-binary-path@2.1.0:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
@@ -510,6 +517,16 @@ packages:
       queue-microtask: 1.2.3
     dev: true
 
+  /sass@1.66.1:
+    resolution: {integrity: sha512-50c+zTsZOJVgFfTgwwEzkjA3/QACgdNsKueWPyAR0mRINIvLAStVQBbPg14iuqEQ74NPDbXzJARJ/O4SI1zftA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.3.4
+      source-map-js: 1.0.2
+    dev: true
+
   /semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
@@ -542,6 +559,11 @@ packages:
   /slash@3.0.0:
     resolution: {integrity: sha512-g9Q1haeby36OSStwb4ntCGGGaKsaVSjQ68fBxoQcutl5fS1vuY18H3wSt3jFyFtrkx+Kz0V1G85A4MyAdDMi2Q==}
     engines: {node: '>=8'}
+    dev: true
+
+  /source-map-js@1.0.2:
+    resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
+    engines: {node: '>=0.10.0'}
     dev: true
 
   /split@0.3.3:
@@ -677,8 +699,8 @@ packages:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
     dev: true
 
-  github.com/eyezahhhh/eags/4f5fcfc06fd1853ded6b6781d77ed53331556bba:
-    resolution: {tarball: https://codeload.github.com/eyezahhhh/eags/tar.gz/4f5fcfc06fd1853ded6b6781d77ed53331556bba}
+  github.com/eyezahhhh/eags/0351d168abe2f8bf676b277d88674314203d5604:
+    resolution: {tarball: https://codeload.github.com/eyezahhhh/eags/tar.gz/0351d168abe2f8bf676b277d88674314203d5604}
     name: eags
     version: 0.0.1
     requiresBuild: true
