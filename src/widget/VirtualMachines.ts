@@ -1,4 +1,4 @@
-import { Box, BoxClass } from "eags";
+import { Box, BoxClass, Label } from "eags";
 import { Virsh } from "../service/Virsh";
 import { VirtualMachine, Props as VMProps } from "./VirtualMachine";
 import { cc } from "../Utils";
@@ -8,6 +8,7 @@ export interface Props {
     childProps?: VMProps
     filter?: (id: string) => boolean
     className?: string
+    noticeClassName?: string
 }
 
 export const VirtualMachines = (props: Props = {}) => Box({
@@ -26,7 +27,16 @@ export const VirtualMachines = (props: Props = {}) => Box({
             // @ts-ignore
             box.children?.forEach(c => c.destroy());
 
-            box.children = vms.map(vm => VirtualMachine(vm, props.childProps));
+            if (vms.length) {
+                box.children = vms.map(vm => VirtualMachine(vm, props.childProps));
+            } else {
+                box.children = [
+                    Label({
+                        label: 'No virtual machines found.',
+                        className: 'E-VirtualMachines-notice' + cc(props.noticeClassName, props.noticeClassName)
+                    })
+                ]
+            }
         }]
     ]
 })

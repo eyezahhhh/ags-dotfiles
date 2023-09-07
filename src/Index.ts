@@ -34,6 +34,7 @@ const startMenu = (monitor: number) => Eags.Window({
     className: 'window',
     margin: [10, 10, 0, 0],
     child: Eags.Box({
+        className: 'startMenu',
         vertical: true,
         children: [
             VirtualMachines({
@@ -46,7 +47,11 @@ const startMenu = (monitor: number) => Eags.Window({
                 }
             }),
             VolumeSliders({
-                audioType: 'apps'
+                audioType: 'apps',
+                childProps: {
+                    showLabel: true
+                },
+                filter: stream => stream.name != 'Scream' || stream.description != 'Virtual Machine'
             })
         ]
     })

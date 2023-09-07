@@ -1,5 +1,15 @@
 @import 'vars';
 
+.E-EventBox {
+    &:active {
+        background: initial;
+    }
+}
+
+
+
+
+
 .E-HyprlandWorkspaces {
     padding: 0 10px;
     background: $background;
@@ -64,6 +74,11 @@
     .E-VirtualMachine {
         margin: 5px;
     }
+
+    .E-VirtualMachines-notice {
+        margin: 5px 10px;
+        font-size: 1.2rem;
+    }
 }
 
 
@@ -103,31 +118,52 @@
 
 
 
-
-.E-VolumeSlider {
-    contents {
-        trough {
-            background: #151112;
-            min-height: 1rem;
-            min-width: 1rem;
-            border-radius: 0.5rem;
-
-            slider {
-                all: unset;
-            }
-        
-            highlight {
-                background: #BB8F6E;
-                border-radius: 0.5rem;
-                border: none;
-                min-width: 1rem;
-                min-height: 1rem;
-            }
-        }
+.E-Scale {
+    .E-Scale-label {
+        min-width: 45px;
     }
 
-    .E-VolumeSlider-label {
-        min-width: 45px;
+    .E-Scale-scale {
+        min-width: 60px;
+
+        contents {
+            trough {
+                background: $background;
+                min-height: 1rem;
+                min-width: 1rem;
+                border-radius: 0.5rem;
+                border: $border-sm solid $foreground-accent;
+    
+                slider {
+                    all: unset;
+                }
+            
+                highlight {
+                    background: $foreground-accent;
+                    border-radius: 0.5rem;
+                    border: none;
+                    min-width: 1rem;
+                    min-height: 1rem;
+                }
+            }
+        }
+
+        &.E-Scale-vertical {
+            min-height: 60px;
+            min-width: 0;
+        }
+    }
+}
+
+
+.E-VolumeSlider {
+    .E-VolumeSlider-scale {
+        min-width: 100px;
+
+        &.E-Scale-vertical {
+            min-height: 100px;
+            min-width: 0;
+        }
     }
 }
 

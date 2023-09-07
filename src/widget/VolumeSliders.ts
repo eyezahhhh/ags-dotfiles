@@ -2,12 +2,15 @@ import { Box, Label } from "eags";
 // @ts-ignore
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import { AudioStream, VolumeSlider } from "./VolumeSlider";
+import { Props as SliderProps } from './Scale';
 import { cc } from "../Utils";
 
 export interface Props {
     audioType?: 'speakers' | 'microphones' | 'apps'
     className?: string
     labelClassName?: string
+    childProps?: Partial<SliderProps>,
+    filter?: (stream: AudioStream) => boolean
 }
 
 export const VolumeSliders = (props: Props = {}) => Box({
@@ -15,7 +18,10 @@ export const VolumeSliders = (props: Props = {}) => Box({
     className: 'E-VolumeSliders' + cc(props.className, props.className),
     connections: [
         [Audio, box => {
-            const streams = Array.from(Audio[props.audioType || 'speakers'].values()) as AudioStream[];
+            let streams = Array.from(Audio[props.audioType || 'speakers'].values()) as AudioStream[];
+            if (props.filter) {
+                streams = streams.filter(props.filter);
+            }
             // @ts-ignore
             box.children?.forEach(c => c.destroy());
 
@@ -27,7 +33,7 @@ export const VolumeSliders = (props: Props = {}) => Box({
                         className: 'E-VolumeSliders-label' + cc(props.labelClassName, props.labelClassName),
                         label: s.name
                     }),
-                    VolumeSlider(s)
+                    VolumeSlider(s, props.childProps)
                 ]
             }));
         }]
