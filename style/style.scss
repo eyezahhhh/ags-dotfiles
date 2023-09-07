@@ -78,6 +78,7 @@
     .E-VirtualMachines-notice {
         margin: 5px 10px;
         font-size: 1.2rem;
+        color: $foreground;
     }
 }
 
@@ -176,5 +177,11 @@
 
     .E-VolumeSliders-label {
         margin-left: 0.5rem;
+    }
+
+    .E-VolumeSliders-notice {
+        margin: 0 5px;
+        font-size: 1.2rem;
+        color: $foreground;
     }
 }

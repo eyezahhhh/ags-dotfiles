@@ -25,17 +25,26 @@ export const VolumeSliders = (props: Props = {}) => Box({
             // @ts-ignore
             box.children?.forEach(c => c.destroy());
 
-            box.children = streams.map(s => Box({
-                vertical: true,
-                children: [
+            if (streams.length) {
+                box.children = streams.map(s => Box({
+                    vertical: true,
+                    children: [
+                        Label({
+                            halign: 'start',
+                            className: 'E-VolumeSliders-label' + cc(props.labelClassName, props.labelClassName),
+                            label: s.name
+                        }),
+                        VolumeSlider(s, props.childProps)
+                    ]
+                }));
+            } else {
+                box.children = [
                     Label({
-                        halign: 'start',
-                        className: 'E-VolumeSliders-label' + cc(props.labelClassName, props.labelClassName),
-                        label: s.name
-                    }),
-                    VolumeSlider(s, props.childProps)
+                        label: `No ${props.audioType || 'speakers'} found.`,
+                        className: 'E-VolumeSliders-notice'
+                    })
                 ]
-            }));
+            }
         }]
     ]
 })

@@ -39,12 +39,10 @@ const startMenu = (monitor: number) => Eags.Window({
         children: [
             VirtualMachines({
                 filter: id => !id.endsWith('-template'),
-                props: {
-                    vertical: true
-                },
                 childProps: {
                     icon: id => `/home/eyezah/.config/ags/assets/vms/${id}.png`
-                }
+                },
+                volumeStreamCriteria: stream => stream.name == 'Scream' && stream.description == 'Virtual Machine'
             }),
             VolumeSliders({
                 audioType: 'apps',
