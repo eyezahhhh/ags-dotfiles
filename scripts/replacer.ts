@@ -4,7 +4,7 @@ const subDirs = __dirname.split("/").length;
 
 export default function exampleReplacer({ orig, file }: AliasReplacerArguments) {
     if (orig.endsWith(`from "eags"`) || orig.endsWith(`from 'eags'`)) {
-        const difSubDirs = file.split("/").length - subDirs - 1;
+        const difSubDirs = file.split("/").length - subDirs - 0;
         let path = "";
         for (let i = 0; i < difSubDirs; i++) {
             path += "../";
