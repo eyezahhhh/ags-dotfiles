@@ -1,4 +1,3 @@
-import { Box, EventBox, EventBoxClass, Label } from "eags";
 import { cc } from "../Utils";
 import { Props, Scale } from "./Scale";
 

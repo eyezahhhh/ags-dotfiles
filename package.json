@@ -14,9 +14,11 @@
   "author": "eyezah",
   "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.3.1",
     "eags": "github:eyezahhhh/eags"
   },
   "devDependencies": {
+    "@rauschma/stringio": "^1.4.0",
     "@types/node": "^20.5.9",
     "nodemon": "^3.0.1",
     "rimraf": "^5.0.1",

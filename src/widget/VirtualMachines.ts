@@ -6,6 +6,13 @@ import { Props as ScaleProps } from "./Scale";
 // @ts-ignore
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import { AudioStream, VolumeSlider } from "./VolumeSlider";
+import { SimpleButton, Props as ButtonProps } from "./SimpleButton";
+import { VirtualMachine as VM } from "../service/Virsh";
+
+export class Hook {
+    setEnabled: (enabled: boolean) => void
+    isEnabled: () => boolean
+}
 
 export interface Props {
     props?: Partial<BoxClass>
@@ -15,6 +22,8 @@ export interface Props {
     noticeClassName?: string
     volumeProps?: ScaleProps
     volumeStreamCriteria?: (stream: AudioStream) => boolean
+    buttons?: ButtonProps[]
+    hook?: (hook: Hook) => void
 }
 
 export const VirtualMachines = (props: Props = {}) => {
@@ -23,11 +32,53 @@ export const VirtualMachines = (props: Props = {}) => {
     });
 
     let stream: AudioStream | null = null;
+    let vmsEnabled = true;
+    let vmList: VM[] = [];
 
-    function buildSlider(vertical: boolean) {
+    function buildList() {
+        let vms = Array.from(Virsh.vms.values());
+        if (props.filter) {
+            const filter = props.filter!;
+            vms = vms.filter(vm => filter(vm.id));
+        }
+        // @ts-ignore
+        vms.sort((a, b) => a.id.toLowerCase() > b.id.toLowerCase());
+        vmList = vms;
+
+        // @ts-ignore
+        list.children?.forEach(c => c.destroy());
+
+        if (vms.length) {
+            list.children = vms.map(vm => VirtualMachine(vm, {
+                ...props.childProps,
+                enabled: vmsEnabled
+            }));
+        } else {
+            list.children = [
+                Label({
+                    label: 'No virtual machines found.',
+                    className: 'E-VirtualMachines-notice' + cc(props.noticeClassName, props.noticeClassName)
+                })
+            ];
+        }
+        return vms;
+    }
+
+    if (props.hook) {
+        props.hook({
+            setEnabled: (enabled) => {
+                vmsEnabled = enabled;
+                buildList()
+            },
+            isEnabled: () => vmsEnabled
+        })
+    }
+
+    function buildSlider() {
         if (!stream) {
             return null;
         }
+        const vertical = !!vmList.length;
         return VolumeSlider(stream, {
             ...props.volumeProps,
             vertical,
@@ -42,48 +93,41 @@ export const VirtualMachines = (props: Props = {}) => {
                 stream = streams.find(props.volumeStreamCriteria!) || null;
                 box.children?.forEach(c => c?.destroy());
                 box.children = [
-                    buildSlider(true) 
+                    buildSlider() 
                 ];
             }]
         ]
     }) : null;
+
+    const rightSide = Box({
+        vertical: true,
+        children: [
+            Box({
+                children: props.buttons?.map(SimpleButton)
+            }),
+            list
+        ]
+    });
 
     return Box({
         ...props.props,
         className: 'E-VirtualMachines' + cc(props.className, props.className),
         children: [
             volume,
-            list
+            rightSide
         ],
         connections: [
             [Virsh, box => {
-                let vms = Array.from(Virsh.vms.values());
-                if (props.filter) {
-                    const filter = props.filter!;
-                    vms = vms.filter(vm => filter(vm.id));
-                }
-                // @ts-ignore
-                vms.sort((a, b) => a.id.toLowerCase() > b.id.toLowerCase())
-
-                // @ts-ignore
-                list.children?.forEach(c => c.destroy());
-
+                const vms = buildList();
                 if (vms.length) {
-                    list.children = vms.map(vm => VirtualMachine(vm, props.childProps));
-                    box.children = [ volume, list ];
+                    box.children = [ volume, rightSide ];
                 } else {
-                    list.children = [
-                        Label({
-                            label: 'No virtual machines found.',
-                            className: 'E-VirtualMachines-notice' + cc(props.noticeClassName, props.noticeClassName)
-                        })
-                    ];
-                    box.children = [ list, volume ];
+                    box.children = [ rightSide, volume ];
                 }
                 if (volume) {
                     volume.children?.forEach(c => c?.destroy());
                     volume.children = [
-                        buildSlider(!!vms.length) 
+                        buildSlider() 
                     ];
                 }
                 box.vertical = !vms.length;

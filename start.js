@@ -1,15 +1,20 @@
-const { exec } = require("child_process");
+const { exec, spawn } = require("child_process");
+const { onExit } = require('@rauschma/stringio');
 
-exec("pwd", (error, dir) => {
+exec("pwd", async (error, dir) => {
     if (error) {
         console.error("Error whilst trying to run 'pwd':", error);
         return;
     }
 
-    const command = `ags -c ${dir.trim()}/dist/Load.js`;
+    const command = `ags`;
+    const options = ['-c', `${dir.trim()}/dist/src/Load.js`];
     console.log(`Starting AGS... (${command})`);
 
-    exec(command, (error, stdout) => {
-        console.log(error, stdout);
+    const ags = spawn(command, options, {
+        stdio: [process.stdin, process.stdout, process.stderr]
     });
+
+    await onExit(ags);
+    console.log('AGS shut down!');
 })

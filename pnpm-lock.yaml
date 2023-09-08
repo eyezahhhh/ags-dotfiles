@@ -5,11 +5,17 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   eags:
     specifier: github:eyezahhhh/eags
     version: github.com/eyezahhhh/eags/27f139e5950859ffdc9fbaa376a5ea6592b21ecb
 
 devDependencies:
+  '@rauschma/stringio':
+    specifier: ^1.4.0
+    version: 1.4.0
   '@types/node':
     specifier: ^20.5.9
     version: 20.5.9
@@ -71,6 +77,16 @@ packages:
     engines: {node: '>=14'}
     requiresBuild: true
     optional: true
+
+  /@rauschma/stringio@1.4.0:
+    resolution: {integrity: sha512-3uor2f/MXZkmX5RJf8r+OC3WvZVzpSme0yyL0rQDPEnatE02qRcqwEwnsgpgriEck0S/n4vWtUd6tTtrJwk45Q==}
+    dependencies:
+      '@types/node': 10.17.60
+    dev: true
+
+  /@types/node@10.17.60:
+    resolution: {integrity: sha512-F0KIgDJfy2nA3zMLmWGKxcH2ZVEtCZXHHdOQs2gSaQ27+lNeEfGxzkIw90aXswATX7AZ33tahPbzy6KAfUreVw==}
+    dev: true
 
   /@types/node@20.5.9:
     resolution: {integrity: sha512-PcGNd//40kHAS3sTlzKB9C9XL4K0sTup8nbG5lC14kzEteTNuAFh9u5nA0o5TWnSG2r/JNPRXFVcHJIIeRlmqQ==}
@@ -197,6 +213,11 @@ packages:
     dependencies:
       path-type: 4.0.0
     dev: true
+
+  /dotenv@16.3.1:
+    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
+    engines: {node: '>=12'}
+    dev: false
 
   /duplexer@0.1.2:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}

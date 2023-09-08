@@ -6,7 +6,17 @@
     }
 }
 
+.E-SimpleButton {
+    font-family: 'Font Awesome 6 Free Solid';
+    background: $background;
+    color: $foreground;
+    border-radius: $radius-sm;
+    font-size: 1.4rem;
 
+    &:hover {
+        color: $foreground-accent;
+    }
+}
 
 
 
@@ -114,6 +124,10 @@
         &:hover {
             color: $foreground-accent;
         }
+    }
+
+    &.E-VirtualMachine-disabled {
+        opacity: 0.5;
     }
 }
 

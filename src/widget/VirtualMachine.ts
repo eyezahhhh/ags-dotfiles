@@ -1,11 +1,14 @@
-import { Box, Button, Icon, Label } from "eags";
+import { Box, Button, Label } from "eags";
 import { VirtualMachine as VM, VirtualMachineState } from "../service/Virsh";
 import { cc, wait } from "../Utils";
+import { Image } from "./Image";
 
 export interface Props {
     nameBeautify?: (id: string) => string
     className?: string
     icon?: (id: string) => string
+    loadingIcon?: string
+    errorIcon?: string
     iconSize?: number
     iconClassName?: string
     nameClassName?: string
@@ -14,6 +17,7 @@ export interface Props {
     state?: (state: VirtualMachineState) => string | null
     buttonLabel?: (state: VirtualMachineState) => string
     loadingLabel?: string
+    enabled?: boolean
 }
 
 function defaultNameBeautify(id: string) {
@@ -55,7 +59,7 @@ function defaultButtonLabel(state: VirtualMachineState): string {
 
 export const VirtualMachine = (vm: VM, props: Props = {}) => {
     const state = props.state ? props.state(vm.state) : defaultStateTranslate(vm.state);
-    const action = stateAction(vm);
+    const action = props.enabled !== false ? stateAction(vm) : null;
 
     let loading = false;
     const buttonLabel = action ? Label({
@@ -63,12 +67,19 @@ export const VirtualMachine = (vm: VM, props: Props = {}) => {
     }) : null;
 
     return Box({
-        className: 'E-VirtualMachine' + cc(props.className, props.className),
+        className: 'E-VirtualMachine' + cc(props.enabled === false, 'E-VirtualMachine-disabled') + cc(props.className, props.className),
         children: [
-            props.icon ? Icon({
-                icon: props.icon(vm.id),
+            // props.icon ? Icon({
+            //     icon: props.icon(vm.id),
+            //     size: props.iconSize || 48,
+            //     className: 'E-VirtualMachine-icon' + cc(props.iconClassName, props.iconClassName)
+            // }) : null,
+            props.icon ? Image({
+                loadingSrc: props.loadingIcon,
+                errorSrc: props.errorIcon,
                 size: props.iconSize || 48,
-                className: 'E-VirtualMachine-icon' + cc(props.iconClassName, props.iconClassName)
+                className: 'E-VirtualMachine-icon' + cc(props.iconClassName, props.iconClassName),
+                src: props.icon(vm.id)
             }) : null,
             Box({
                 hexpand: true,
