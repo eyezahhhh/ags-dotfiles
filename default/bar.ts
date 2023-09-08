@@ -8,7 +8,7 @@ const bar = (monitor: number) => Eags.Window({
     exclusive: true,
     monitor,
     className: "window",
-    name: `window-${monitor}`,
+    name: `E-Bar-${monitor}`,
     child: Eags.CenterBox({
         className: "bar",
         startWidget: HyprlandWorkspaces({

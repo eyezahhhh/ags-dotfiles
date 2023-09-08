@@ -119,7 +119,7 @@
     "replacers": {
       "replacer": {
         "enabled": true,
-        "file": "./replacer.js"
+        "file": "./scripts/replacer.js"
       }
     }
   }

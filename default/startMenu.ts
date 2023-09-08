@@ -51,6 +51,7 @@ const startMenu = (monitor: number) => Eags.Window({
     monitor,
     className: 'window',
     margin: [10, 10, 0, 0],
+    name: `E-StartMenu-${monitor}`,
     child: Eags.Box({
         className: 'startMenu',
         vertical: true,

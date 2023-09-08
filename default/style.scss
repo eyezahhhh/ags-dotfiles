@@ -18,6 +18,12 @@
     }
 }
 
+.E-LargeButton {
+    font-size: 4rem;
+    margin: 10px;
+    padding: 15px;
+}
+
 
 
 .E-HyprlandWorkspaces {
@@ -197,5 +203,31 @@
         margin: 0 5px;
         font-size: 1.2rem;
         color: $foreground;
+    }
+}
+
+
+
+.E-Popup {
+    background: $background;
+    border: $border-md solid $foreground-accent;
+    border-radius: $radius-lg;
+    min-width: 50px;
+    min-height: 50px;
+
+    .E-Popup-inner {
+        padding: 10px;
+    }
+}
+
+
+.E-PowerPopup {
+
+    .E-LargeButton {
+
+        &:focus {
+            background: $foreground-accent;
+            color: $background;
+        }
     }
 }
