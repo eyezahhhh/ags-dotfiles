@@ -7,7 +7,7 @@
     "clean": "npx rimraf ./dist",
     "build": "npm run clean && npx tsc && npm run tsc-alias",
     "start": "node scripts/start.js",
-    "tsc-alias": "npx tsc scripts/replacscriptser.ts --module commonjs --target es2017 && npx tsc-alias",
+    "tsc-alias": "npx tsc scripts/replacer.ts --module commonjs --target es2017 && npx tsc-alias",
     "watch": "npm run build && npx tsc-watch --onSuccess \"npx tsc-alias\"",
     "dev": "npx nodemon -V -e js,ts,scss"
   },
