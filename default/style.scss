@@ -285,8 +285,9 @@
     margin-bottom: 10px;
     border-radius: $radius-md;
 
-    .E-Notification-Image {
+    .E-Notification-image {
         margin-right: 10px;
+        border-radius: $radius-sm;
     }
 
     .E-Notification-title {

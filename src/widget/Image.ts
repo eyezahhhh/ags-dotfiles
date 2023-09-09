@@ -4,8 +4,7 @@ import { cc, dcc } from "../Utils";
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { testPathCache, testPaths } from "../FileIndex";
 
-export interface Props {
-    size?: number
+export type Props = {
     className?: string
     iconClassName?: string
     src: string | string[]
@@ -13,11 +12,17 @@ export interface Props {
     errorSrc?: string
     alwaysCheckAgain?: boolean
     props?: Partial<IconClass>
-}
+} & (
+    {
+        stylable?: false
+        size?: number
+    } | {
+        stylable: true
+        size: [number, number]
+    }
+)
 
 export const Image = (props: Props) => {
-    const src = typeof props.src == 'string' ? [ props.src ] : props.src;
-
     let destroyed = false;
 
     const box = Box({
@@ -31,14 +36,25 @@ export const Image = (props: Props) => {
         src = src.trim();
         if (!src) return;
         if (destroyed) return;
-        box.children = [
-            Icon({
-                ...props.props,
-                icon: src,
-                size: props.size,
-                className: 'E-Image-icon' + dcc(props.iconClassName)
-            })
-        ];
+        if (props.stylable) {
+            box.children = [
+                Box({
+                    ...props.props,
+                    // @ts-ignore
+                    style: `background: url("${src}"); min-width: ${props.size[0]}px; min-height: ${props.size[1]}px; background-size: ${props.size[0]}px ${props.size[1]}px;`,
+                    className: 'E-Image-icon' + dcc(props.iconClassName)
+                })
+            ]
+        } else {
+            box.children = [
+                Icon({
+                    ...props.props,
+                    icon: src,
+                    size: props.size,
+                    className: 'E-Image-icon' + dcc(props.iconClassName)
+                })
+            ];
+        }
     }
 
     const cachedFile = testPathCache(props.src);

@@ -30,8 +30,9 @@ export const Notification = (notification: NotificationType, props: Props = {}) 
             children: [
                 notification.image ? Image({
                     src: notification.image,
-                    size: 70,
-                    className: 'E-Notification-Image',
+                    size: [70, 70],
+                    stylable: true,
+                    iconClassName: 'E-Notification-image',
                     props: {
                         valign: 'start'
                     }
@@ -57,11 +58,7 @@ export const Notification = (notification: NotificationType, props: Props = {}) 
                         Label({
                             label: notification.body,
                             halign: 'start',
-                            className: 'E-Notification-body',
-                            // @ts-ignore
-                            maxWidthChars: 40,
-                            // @ts-ignore
-                            wrap: true
+                            className: 'E-Notification-body' // todo: figure out word wrapping
                         }),
                         Box({
                             children: notification.actions.map(action => Button({
