@@ -3,7 +3,7 @@ import { Box, Label } from "eags";
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import { AudioStream, VolumeSlider } from "./VolumeSlider";
 import { Props as SliderProps } from './Scale';
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 
 export interface Props {
     audioType?: 'speakers' | 'microphones' | 'apps'
@@ -15,7 +15,7 @@ export interface Props {
 
 export const VolumeSliders = (props: Props = {}) => Box({
     vertical: true,
-    className: 'E-VolumeSliders' + cc(props.className, props.className),
+    className: 'E-VolumeSliders' + dcc(props.className),
     connections: [
         [Audio, box => {
             let streams = Array.from(Audio[props.audioType || 'speakers'].values()) as AudioStream[];
@@ -31,7 +31,7 @@ export const VolumeSliders = (props: Props = {}) => Box({
                     children: [
                         Label({
                             halign: 'start',
-                            className: 'E-VolumeSliders-label' + cc(props.labelClassName, props.labelClassName),
+                            className: 'E-VolumeSliders-label' + dcc(props.labelClassName),
                             label: s.name
                         }),
                         VolumeSlider(s, props.childProps)

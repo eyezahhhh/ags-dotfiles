@@ -3,7 +3,7 @@ import { Box, BoxClass, Button, Label } from 'eags';
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
 // @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-import { cc } from '../Utils';
+import { cc, dcc } from '../Utils';
 
 /*
     box
@@ -36,7 +36,7 @@ export interface Props {
 
 export const HyprlandWorkspaces = (props: Props = {}) => Box({
     ...props.props,
-    className: 'E-HyprlandWorkspaces' + cc(props.className, props.className),
+    className: 'E-HyprlandWorkspaces' + dcc(props.className),
     connections: [
         [Hyprland, box => {
             const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
@@ -56,7 +56,7 @@ export const HyprlandWorkspaces = (props: Props = {}) => Box({
                         label: contents
                     }),
                     className: 'E-HyprlandWorkspaces-button'
-                        + cc(props.buttonClassName, props.buttonClassName)
+                        + dcc(props.buttonClassName)
                         + cc(active, 'E-HyprlandWorkspaces-active')
                         + cc(active, props.activeClassName)
                         + cc(populated, 'E-HyprlandWorkspaces-populated')

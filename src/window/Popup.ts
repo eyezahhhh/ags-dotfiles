@@ -1,5 +1,5 @@
 import { Box, Revealer, RevealerClass, Widget, Window, WindowClass } from "eags";
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 
 let popupCount = 0;
 
@@ -18,7 +18,7 @@ export const Popup = (props: Props) => {
         anchor: [],
         monitor: props.monitor,
         name: name,
-        className: 'E-Popup' + cc(props.props?.className, props.props?.className),
+        className: 'E-Popup' + dcc(props.props?.className),
         popup: true,
         focusable: true,
         child: Box({

@@ -1,4 +1,4 @@
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 import { Props, Scale } from "./Scale";
 
 export class AudioStream {
@@ -16,10 +16,10 @@ export const VolumeSlider = (stream: AudioStream, props: Partial<Props> = {}) =>
     roundOnScroll: 5,
     label: value => `${Math.round(value)}%`,
     ...props,
-    className: 'E-VolumeSlider' + cc(props.className, props.className),
-    innerClassName: 'E-VolumeSlider-inner' + cc(props.innerClassName, props.innerClassName),
-    labelClassName: 'E-VolumeSlider-label' + cc(props.labelClassName, props.labelClassName),
-    scaleClassName: 'E-VolumeSlider-scale' + cc(props.scaleClassName, props.scaleClassName),
+    className: 'E-VolumeSlider' + dcc(props.className),
+    innerClassName: 'E-VolumeSlider-inner' + dcc(props.innerClassName),
+    labelClassName: 'E-VolumeSlider-label' + dcc(props.labelClassName),
+    scaleClassName: 'E-VolumeSlider-scale' + dcc(props.scaleClassName),
     initialValue: stream.volume * 100,
     onChange: value => {
         stream.volume = value / 100;

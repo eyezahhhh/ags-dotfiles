@@ -231,3 +231,17 @@
         }
     }
 }
+
+
+
+.E-NetworkUsage {
+    background: $background;
+    border: $border-md solid $foreground-accent;
+    border-radius: $radius-md;
+    padding: 5px 10px;
+    color: $foreground;
+
+    .E-NetworkUsage-receive {
+        margin-right: 15px;
+    }
+}

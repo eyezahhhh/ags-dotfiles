@@ -112,7 +112,7 @@ export class Virsh {
         Service.export(this, 'Virsh');
     }
 
-    static instance = new VirshService();
+    private static instance = new VirshService();
 
     static get vms() {
         return this.instance.vms;
@@ -120,5 +120,9 @@ export class Virsh {
 
     static set pollingDelay(milliseconds: number) {
         this.instance.pollingDelay = milliseconds;
+    }
+
+    static get pollingDelay() {
+        return this.instance.pollingDelay;
     }
 }

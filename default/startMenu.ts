@@ -4,6 +4,9 @@ import { Hook as VMHook, VirtualMachines } from "../src/widget/VirtualMachines.j
 // @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import * as Eags from "eags";
+import { NetworkUsage } from "../src/widget/NetworkUsage";
+import { NetworkSpeed } from "../src/service/NetworkSpeed";
+import { formatFileSize } from "../src/Utils";
 
 let vmHook: VMHook;
 const vms = VirtualMachines({
@@ -63,6 +66,14 @@ const startMenu = (monitor: number) => Eags.Window({
                     showLabel: true
                 },
                 filter: stream => stream.name != 'Scream' || stream.description != 'Virtual Machine'
+            }),
+            NetworkUsage({
+                interface: 'eno1',
+                receiveLabel: speed => ` ${formatFileSize(speed)}`,
+                sendLabel: speed => ` ${formatFileSize(speed)}`,
+                props: {
+                    halign: 'center'
+                }
             })
         ]
     })

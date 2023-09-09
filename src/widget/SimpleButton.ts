@@ -1,5 +1,5 @@
 import { Button, ButtonClass, Label } from "eags";
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 
 export interface Props {
     label: string
@@ -9,9 +9,9 @@ export interface Props {
 
 export const SimpleButton = (props: Props) => Button({
     ...props.props,
-    className: 'E-SimpleButton' + cc(props.props?.className, props.props?.className),
+    className: 'E-SimpleButton' + dcc(props.props?.className),
     child: Label({
         label: props.label,
-        className: 'E-SimpleButton-label' + cc(props.labelClassName, props.labelClassName)
+        className: 'E-SimpleButton-label' + dcc(props.labelClassName)
     })
 })

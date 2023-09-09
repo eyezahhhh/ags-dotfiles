@@ -1,6 +1,6 @@
 import { Box, Button, Label } from "eags";
 import { VirtualMachine as VM, VirtualMachineState } from "../service/Virsh";
-import { cc, wait } from "../Utils";
+import { cc, dcc, wait } from "../Utils";
 import { Image } from "./Image";
 
 export interface Props {
@@ -67,18 +67,13 @@ export const VirtualMachine = (vm: VM, props: Props = {}) => {
     }) : null;
 
     return Box({
-        className: 'E-VirtualMachine' + cc(props.enabled === false, 'E-VirtualMachine-disabled') + cc(props.className, props.className),
+        className: 'E-VirtualMachine' + cc(props.enabled === false, 'E-VirtualMachine-disabled') + dcc(props.className),
         children: [
-            // props.icon ? Icon({
-            //     icon: props.icon(vm.id),
-            //     size: props.iconSize || 48,
-            //     className: 'E-VirtualMachine-icon' + cc(props.iconClassName, props.iconClassName)
-            // }) : null,
             props.icon ? Image({
                 loadingSrc: props.loadingIcon,
                 errorSrc: props.errorIcon,
                 size: props.iconSize || 48,
-                className: 'E-VirtualMachine-icon' + cc(props.iconClassName, props.iconClassName),
+                className: 'E-VirtualMachine-icon' + dcc(props.iconClassName),
                 src: props.icon(vm.id)
             }) : null,
             Box({
@@ -89,19 +84,19 @@ export const VirtualMachine = (vm: VM, props: Props = {}) => {
                         halign: 'start',
                         vexpand: true,
                         label: props.nameBeautify ? props.nameBeautify(vm.id) : defaultNameBeautify(vm.id),
-                        className: 'E-VirtualMachine-name' + cc(props.nameClassName, props.nameClassName)
+                        className: 'E-VirtualMachine-name' + dcc(props.nameClassName)
                     }),
                     state ? Label({
                         halign: 'start',
                         label: state,
-                        className: 'E-VirtualMachine-status' + cc(props.statusClassName, props.statusClassName)
+                        className: 'E-VirtualMachine-status' + dcc(props.statusClassName)
                     }) : null
                 ]
             }),
             action ? Button({
                 // @ts-ignore
                 child: buttonLabel,
-                className: 'E-VirtualMachine-button' + cc(props.buttonClassName, props.buttonClassName),
+                className: 'E-VirtualMachine-button' + dcc(props.buttonClassName),
                 valign: 'center',
                 onClicked: async () => {
                     if (loading || vm.state == VirtualMachineState.SHUTTING_DOWN || vm.state == VirtualMachineState.DYING) return;

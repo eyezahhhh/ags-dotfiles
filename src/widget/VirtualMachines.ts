@@ -1,7 +1,7 @@
 import { Box, BoxClass, Label } from "eags";
 import { Virsh } from "../service/Virsh";
 import { VirtualMachine, Props as VMProps } from "./VirtualMachine";
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 import { Props as ScaleProps } from "./Scale";
 // @ts-ignore
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
@@ -57,7 +57,7 @@ export const VirtualMachines = (props: Props = {}) => {
             list.children = [
                 Label({
                     label: 'No virtual machines found.',
-                    className: 'E-VirtualMachines-notice' + cc(props.noticeClassName, props.noticeClassName)
+                    className: 'E-VirtualMachines-notice' + dcc(props.noticeClassName)
                 })
             ];
         }
@@ -111,7 +111,7 @@ export const VirtualMachines = (props: Props = {}) => {
 
     return Box({
         ...props.props,
-        className: 'E-VirtualMachines' + cc(props.className, props.className),
+        className: 'E-VirtualMachines' + dcc(props.className),
         children: [
             volume,
             rightSide

@@ -1,5 +1,5 @@
 import { Box, Icon } from "eags";
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 // @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { testPathCache, testPaths } from "../FileIndex";
@@ -20,7 +20,7 @@ export const Image = (props: Props) => {
     let destroyed = false;
 
     const box = Box({
-        className: 'E-Image' + cc(props.className, props.className),
+        className: 'E-Image' + dcc(props.className),
         connections: [
             ['destroy', () => destroyed = true]
         ]
@@ -34,7 +34,7 @@ export const Image = (props: Props) => {
             Icon({
                 icon: src,
                 size: props.size,
-                className: 'E-Image-icon' + cc(props.iconClassName, props.iconClassName)
+                className: 'E-Image-icon' + dcc(props.iconClassName)
             })
         ];
     }

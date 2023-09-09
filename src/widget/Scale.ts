@@ -1,5 +1,5 @@
 import { Box, Slider as EagsSlider, EventBox, EventBoxClass, Label } from "eags";
-import { cc } from "../Utils";
+import { cc, dcc } from "../Utils";
 
 export interface Props {
     showLabel?: boolean
@@ -28,7 +28,7 @@ export const Scale = (props: Props) => {
 
     const label = props.showLabel !== false ? Label({
         label: getLabel(props.initialValue),
-        className: 'E-Scale-label' + cc(props.labelClassName, props.labelClassName)
+        className: 'E-Scale-label' + dcc(props.labelClassName)
     }) : null;
 
     const slider = EagsSlider({
@@ -39,7 +39,7 @@ export const Scale = (props: Props) => {
         value: props.initialValue,
         drawValue: false,
         vertical: !!props.vertical,
-        className: 'E-Scale-scale' + cc(props.vertical, 'E-Scale-vertical') + cc(props.scaleClassName, props.scaleClassName),
+        className: 'E-Scale-scale' + cc(props.vertical, 'E-Scale-vertical') + dcc(props.scaleClassName),
         // @ts-ignore
         inverted: !!props.vertical,
         // @ts-ignore
@@ -55,9 +55,9 @@ export const Scale = (props: Props) => {
 
     return EventBox({
         ...props.props,
-        className: 'E-EventBox' + cc(props.className, props.className),
+        className: 'E-EventBox' + dcc(props.className),
         child: Box({
-            className: 'E-Scale' + cc(props.innerClassName, props.innerClassName),
+            className: 'E-Scale' + dcc(props.innerClassName),
             vertical: !!props.vertical,
             halign: props.vertical ? 'start' : 'fill',
             valign: props.vertical ? 'fill' : 'start',
