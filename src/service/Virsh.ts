@@ -109,7 +109,7 @@ class VirshService extends Service {
 
 export class Virsh {
     static {
-        Service.export(this, 'Virsh');
+        Service['Virsh'] = this;
     }
 
     private static instance = new VirshService();

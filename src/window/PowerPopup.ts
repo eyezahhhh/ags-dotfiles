@@ -2,12 +2,13 @@ import { Popup } from "./Popup";
 import { LargeButton, Props as ButtonProps } from "../widget/LargeButton";
 // @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
-import { BoxClass, WindowClass } from "eags";
+import { BoxClass, RevealerTransition, WindowClass } from "eags";
 
 export interface Props {
     monitor: number
     buttons: ButtonProps[]
     focusedButton?: number
+    transition?: RevealerTransition
 }
 
 export const PowerPopup = (props: Props) => {
@@ -15,6 +16,7 @@ export const PowerPopup = (props: Props) => {
         monitor: props.monitor,
         children: props.buttons.map(LargeButton),
         name: 'E-PowerPopup',
+        transition: props.transition,
         props: {
             connections: [
                 // @ts-ignore

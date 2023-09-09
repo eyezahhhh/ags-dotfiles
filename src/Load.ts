@@ -8,6 +8,8 @@ const __dirname = exec("pwd");
 export class Loader {
     private windows: WindowClass[] = [];
     private stylesheets = 0;
+    private readonly windowDelays: {[name: string]: number} = {};
+    private notificationPopupTimeout = 5000;
 
     constructor() {
         exec(`rm -rf ${__dirname}/.css`);
@@ -29,8 +31,28 @@ export class Loader {
         }
     }
 
+    setWindowCloseDelay(window: WindowClass | string, ms: number) {
+        if (typeof window != 'string') {
+            window = window.name!;
+        }
+
+        this.windowDelays[window] = ms;
+    }
+
     getWindows() {
         return this.windows;
+    }
+
+    getWindowCloseDelays() {
+        return this.windowDelays;
+    }
+
+    setNotificationPopupTimeout(ms: number) {
+        this.notificationPopupTimeout = ms;
+    }
+
+    getNotificationPopupTimeout() {
+        return this.notificationPopupTimeout;
     }
 
     transpileStylesheets() {
@@ -50,6 +72,7 @@ const entrypoints = (env.ENTRY as string).split(',').filter(e => e).map(e => e.t
 });
 
 const loader = new Loader();
+(globalThis as any).loader = loader;
 
 for (let entrypoint of entrypoints) {
     try {
@@ -67,7 +90,10 @@ console.log(`Transpiling stylesheets...`);
 loader.transpileStylesheets();
 console.log(`Transpiled stylesheets`);
 
+
 export default {
     style: __dirname + '/.css/out.css',
-    windows: loader.getWindows()
+    windows: loader.getWindows(),
+    closeWindowDelay: loader.getWindowCloseDelays(),
+    notificationPopupTimeout: loader.getNotificationPopupTimeout()
 }

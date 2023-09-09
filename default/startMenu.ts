@@ -5,8 +5,9 @@ import { Hook as VMHook, VirtualMachines } from "../src/widget/VirtualMachines.j
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import * as Eags from "eags";
 import { NetworkUsage } from "../src/widget/NetworkUsage";
-import { NetworkSpeed } from "../src/service/NetworkSpeed";
 import { formatFileSize } from "../src/Utils";
+import { MediaSection } from "../src/widget/MediaSection";
+import { SimpleButton } from "../src/widget/SimpleButton";
 
 let vmHook: VMHook;
 const vms = VirtualMachines({
@@ -47,7 +48,7 @@ const vms = VirtualMachines({
             }
         }
     ]
-})
+});
 
 const startMenu = (monitor: number) => Eags.Window({
     anchor: ['top', 'right'],
@@ -74,7 +75,8 @@ const startMenu = (monitor: number) => Eags.Window({
                 props: {
                     halign: 'center'
                 }
-            })
+            }),
+            MediaSection()
         ]
     })
 })

@@ -1,4 +1,4 @@
-import { Box, Icon } from "eags";
+import { Box, Icon, IconClass } from "eags";
 import { cc, dcc } from "../Utils";
 // @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
@@ -12,6 +12,7 @@ export interface Props {
     loadingSrc?: string
     errorSrc?: string
     alwaysCheckAgain?: boolean
+    props?: Partial<IconClass>
 }
 
 export const Image = (props: Props) => {
@@ -32,6 +33,7 @@ export const Image = (props: Props) => {
         if (destroyed) return;
         box.children = [
             Icon({
+                ...props.props,
                 icon: src,
                 size: props.size,
                 className: 'E-Image-icon' + dcc(props.iconClassName)

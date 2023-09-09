@@ -6,16 +6,21 @@
     }
 }
 
-.E-SimpleButton {
-    font-family: 'Font Awesome 6 Free Solid';
+.E-Button {
     background: $background;
     color: $foreground;
     border-radius: $radius-sm;
-    font-size: 1.4rem;
 
     &:hover {
         color: $foreground-accent;
     }
+}
+
+.E-SimpleButton {
+    @extend .E-Button;
+
+    font-family: 'Font Awesome 6 Free Solid';
+    font-size: 1.4rem;
 }
 
 .E-LargeButton {
@@ -212,10 +217,8 @@
     background: $background;
     border: $border-md solid $foreground-accent;
     border-radius: $radius-lg;
-    min-width: 50px;
-    min-height: 50px;
 
-    .E-Popup-inner {
+    .E-Popup-outer {
         padding: 10px;
     }
 }
@@ -243,5 +246,60 @@
 
     .E-NetworkUsage-receive {
         margin-right: 15px;
+    }
+}
+
+
+
+.E-NotificationPopups {
+    min-width: 100px;
+    min-height: 100px;
+    background: red;
+}
+
+.E-NotificationPopup {
+    padding: 10px;
+    background: $background;
+    border-radius: $radius-md;
+    border: $border-md solid $foreground-accent;
+    margin-bottom: 10px;
+}
+
+
+.E-NotificationPopups {
+    background: transparent;
+
+    .E-NotificationPopups-inner {
+        min-height: 1px;
+        min-width: 1px;
+        background: transparent;
+    }
+}
+
+
+
+.E-Notification {
+    background: $background;
+    padding: 10px;
+    border: $border-md solid $foreground-accent;
+    margin-bottom: 10px;
+    border-radius: $radius-md;
+
+    .E-Notification-Image {
+        margin-right: 10px;
+    }
+
+    .E-Notification-title {
+        font-weight: 500;
+        font-size: 1.3rem;
+        margin-right: 10px;
+    }
+
+    .E-Notification-body {
+        margin-bottom: 10px;
+    }
+
+    .E-Notification-close {
+        font-size: 1rem;
     }
 }

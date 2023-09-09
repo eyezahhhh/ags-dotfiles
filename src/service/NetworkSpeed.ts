@@ -27,8 +27,6 @@ export class NetworkSpeedService extends Service {
     constructor() {
         super();
 
-        console.log('Registered network speed service');
-
         this.ifstat().finally(async () => {
             while (1) {
                 await wait(this.pollingDelay);
@@ -102,7 +100,7 @@ export class NetworkSpeedService extends Service {
 
 export class NetworkSpeed {
     static {
-        Service.export(this, 'NetworkSpeed');
+        Service['NetworkSpeed'] = this;
     }
 
     private static instance = new NetworkSpeedService();

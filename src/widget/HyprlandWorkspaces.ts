@@ -61,7 +61,7 @@ export const HyprlandWorkspaces = (props: Props = {}) => Box({
                         + cc(active, props.activeClassName)
                         + cc(populated, 'E-HyprlandWorkspaces-populated')
                         + cc(populated, props.populatedClassName)
-                })
+                });
             })
         }]
     ]

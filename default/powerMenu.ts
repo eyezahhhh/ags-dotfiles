@@ -42,7 +42,8 @@ const powerMenu = PowerPopup({
             }
         }
     ],
-    focusedButton: 3
+    focusedButton: 3,
+    transition: 'slide_up'
 });
 
 export default function(loader: Loader) {
