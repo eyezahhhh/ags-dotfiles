@@ -22,6 +22,8 @@ export interface Props {
 }
 
 export const Notification = (notification: NotificationType, props: Props = {}) => {
+    let destroyed = false;
+
     const revealer = Revealer({
         // @ts-ignore
         revealChild: !props.transition,
@@ -72,13 +74,18 @@ export const Notification = (notification: NotificationType, props: Props = {}) 
                     ]
                 })
             ]
-        })
+        }),
+        connections: [
+            ['destroy', () => destroyed = true]
+        ]
     });
 
     if (props.transition) {
         setTimeout(() => {
-            // @ts-ignore
-            revealer.revealChild = true;
+            if (!destroyed) {
+                // @ts-ignore
+                revealer.revealChild = true;
+            }
         })
     }
 

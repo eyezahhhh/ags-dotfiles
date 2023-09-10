@@ -5,7 +5,8 @@ const popups = NotificationPopups({
     anchor: ['bottom', 'right'],
     monitor: 0,
     margin: [0, 10, 0, 0],
-    transition: 'slide_left'
+    transition: 'slide_left',
+    maxNotifications: 5
 });
 
 export default function(loader: Loader) {

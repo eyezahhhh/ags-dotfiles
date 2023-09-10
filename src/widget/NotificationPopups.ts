@@ -1,4 +1,4 @@
-import { Box, Revealer, RevealerClass, RevealerTransition, Window, WindowAnchor } from "eags";
+import { Box, RevealerTransition, Window, WindowAnchor } from "eags";
 // @ts-ignore
 import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
 import { Notification, NotificationType } from "./Notification";
@@ -10,6 +10,7 @@ export interface Props {
     monitor: number
     margin?: number[]
     transition?: RevealerTransition
+    maxNotifications?: number
 }
 
 export const NotificationPopups = (props: Props) => {
@@ -27,6 +28,9 @@ export const NotificationPopups = (props: Props) => {
             connections: [
                 [Notifications, box => {
                     const notifications = Array.from(Notifications.popups.values()) as NotificationType[];
+                    if (props.maxNotifications && notifications.length > props.maxNotifications) {
+                        notifications.slice(notifications.length - props.maxNotifications, notifications.length);
+                    }
 
                     box.children = notifications.map(n => Notification(n, {
                         transition: oldNotifications.includes(n.id) ? null : props.transition || 'none'

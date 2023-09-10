@@ -1,7 +1,5 @@
 import { Box, Icon, IconClass } from "eags";
-import { cc, dcc } from "../Utils";
-// @ts-ignore
-import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
+import { dcc } from "../Utils";
 import { testPathCache, testPaths } from "../FileIndex";
 
 export type Props = {
@@ -41,7 +39,7 @@ export const Image = (props: Props) => {
                 Box({
                     ...props.props,
                     // @ts-ignore
-                    style: `background: url("${src}"); min-width: ${props.size[0]}px; min-height: ${props.size[1]}px; background-size: ${props.size[0]}px ${props.size[1]}px;`,
+                    style: `background: url("${src}"); min-width: ${props.size[0]}px; min-height: ${props.size[1]}px; background-size: 100% 100%`,
                     className: 'E-Image-icon' + dcc(props.iconClassName)
                 })
             ]

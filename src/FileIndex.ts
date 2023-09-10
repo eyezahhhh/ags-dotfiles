@@ -1,6 +1,5 @@
 // @ts-ignore
-import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-
+const { GLib } = imports.gi;
 
 const exists = new Map<string, boolean>();
 
@@ -11,12 +10,13 @@ export async function testPaths(paths: string | string[], forceCheck = false) {
     for (let path of paths) {
         const pathExists = exists.get(path);
         if (forceCheck || pathExists === undefined) {
-            // check if file exists
-            const fileExists = (await execAsync(`node scripts/file-exists.js ${path}`)).trim() == path;
-            exists.set(path, fileExists);
-            if (fileExists) {
-                return path;
-            }
+            try {
+                const fileExists = GLib.file_test(path, GLib.FileTest.EXISTS);
+                exists.set(path, fileExists);
+                if (fileExists) {
+                    return path;
+                }
+            } catch {}
         } else {
             if (pathExists) {
                 return path;
@@ -33,4 +33,8 @@ export function testPathCache(paths: string | string[]) {
         }
     }
     return null;
+}
+
+export function registerPath(path: string, fileExists: boolean) {
+    exists.set(path, fileExists);
 }

@@ -304,3 +304,39 @@
         font-size: 1rem;
     }
 }
+
+
+
+.E-MediaSection {
+    background: $background;
+    border: $border-md solid $foreground-accent;
+    padding: 10px;
+    border-radius: $radius-md;
+    background-size: 100% 100%;
+    min-width: 400px;
+    color: $foreground-focus;
+
+    .E-MediaSection-image {
+        border-radius: $radius-sm;
+        margin-right: 10px;
+    }
+
+    .E-MediaSection-title {
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
+    .E-MediaSection-buttons {
+        margin-top: 10px;
+
+        .E-SimpleButton {
+            background: transparent;
+            margin-right: 10px;
+            border-color: transparent;
+
+            &:hover, &:focus {
+                background: $background;
+                border-color: $foreground-accent;
+            }
+        }
+    }
+}
