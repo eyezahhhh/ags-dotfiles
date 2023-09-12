@@ -1,8 +1,6 @@
-@import 'vars';
-
 .E-EventBox {
     &:active {
-        background: initial;
+        background: transparent;
     }
 }
 
@@ -254,7 +252,7 @@
 .E-NotificationPopups {
     min-width: 100px;
     min-height: 100px;
-    background: red;
+    background: red; // todo: remove
 }
 
 .E-NotificationPopup {
@@ -311,7 +309,7 @@
     background: $background;
     border: $border-md solid $foreground-accent;
     padding: 10px;
-    border-radius: $radius-md;
+    border-radius: $radius-lg;
     background-size: 100% 100%;
     min-width: 400px;
     color: $foreground-focus;
@@ -337,6 +335,43 @@
                 background: $background;
                 border-color: $foreground-accent;
             }
+        }
+    }
+}
+
+
+
+.E-ThemeSelector {
+    background: $background;
+    padding: 10px;
+    border: $border-md solid $foreground-accent;
+    border-radius: $radius-lg;
+
+    .E-ThemeSelector-theme {
+        border-radius: $radius-sm;
+        border: $border-sm solid transparent;
+
+        &:focus, &:hover {
+            border-color: $foreground-accent;
+        }
+
+        &:active {
+            background: $foreground-accent;
+        }
+
+        .E-ThemeSelector-label {
+            padding: 5px 10px;
+            color: $foreground;
+        }
+    }
+}
+
+
+
+.E-Wallpaper {
+    .E-Wallpaper-inner {
+        .E-Wallpaper-image {
+            background-position: center;
         }
     }
 }

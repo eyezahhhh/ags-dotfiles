@@ -1,0 +1,21 @@
+
+> eags-extended-widgets@0.0.1 start /home/eyezah/Documents/ags/eags-extended-widgets
+> node scripts/start.js
+
+Starting AGS... (ags)
+Gjs-Console-Message: 22:14:23.109: Loaded ../default/bar.js
+Gjs-Console-Message: 22:14:23.124: Loaded ../default/startMenu.js
+Gjs-Console-Message: 22:14:23.129: Loaded ../default/powerMenu.js
+Gjs-Console-Message: 22:14:23.135: Loaded ../default/notificationPopups.js
+Gjs-Console-Message: 22:14:23.141: Loaded ../default/wallpaper.js
+Gjs-Console-Message: 22:14:23.141: Transpiling stylesheets...
+Gjs-Console-Message: 22:14:23.226: Transpiled stylesheets
+Gjs-Console-Message: 22:14:23.226: Loading 7 windows:
+Gjs-Console-Message: 22:14:23.226:  - E-Bar-primary
+Gjs-Console-Message: 22:14:23.226:  - E-Bar-secondary
+Gjs-Console-Message: 22:14:23.226:  - E-StartMenu-0
+Gjs-Console-Message: 22:14:23.226:  - E-PowerPopup
+Gjs-Console-Message: 22:14:23.226:  - E-notification-popups
+Gjs-Console-Message: 22:14:23.226:  - E-Wallpaper-0
+Gjs-Console-Message: 22:14:23.226:  - E-Wallpaper-1
+ ELIFECYCLE  Command failed.

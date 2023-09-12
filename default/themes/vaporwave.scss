@@ -1,0 +1,18 @@
+$radius-sm: 4px;
+$radius-md: 4px;
+$radius-lg: 4px;
+
+$background: #000007;
+$background-transparent: #0000074D;
+$foreground: #ffffff;
+$foreground-focus: #ffffff;
+$foreground-accent: #ff65ff;
+
+$border-md: 2px;
+$border-sm: 2px;
+
+$font-monospace: 'Ubuntu Mono';
+$font-monospace-size-multiplier: 1.1;
+
+@import '../style';
+@import '../user';

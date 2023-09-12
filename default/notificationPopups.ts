@@ -6,7 +6,8 @@ const popups = NotificationPopups({
     monitor: 0,
     margin: [0, 10, 0, 0],
     transition: 'slide_left',
-    maxNotifications: 5
+    maxNotifications: 5,
+    name: 'E-notification-popups'
 });
 
 export default function(loader: Loader) {

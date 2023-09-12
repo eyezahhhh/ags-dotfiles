@@ -1,5 +1,5 @@
 /scripts/replacer.js
 /dist
 /node_modules
-/.css
-.env
+.*
+/default/Pywal

@@ -11,6 +11,7 @@ export interface Props {
     margin?: number[]
     transition?: RevealerTransition
     maxNotifications?: number
+    name: string
 }
 
 export const NotificationPopups = (props: Props) => {
@@ -21,6 +22,7 @@ export const NotificationPopups = (props: Props) => {
         monitor: props.monitor,
         margin: props.margin || [],
         className: 'E-NotificationPopups',
+        name: props.name,
         layer: 'top',
         child: Box({
             vertical: true,

@@ -2,6 +2,7 @@
 import { exec } from 'resource:///com/github/Aylur/ags/utils.js';
 import { WindowClass } from "eags";
 import { getEnvs } from "./Utils";
+import { Themes } from './service/Themes';
 
 const __dirname = exec("pwd");
 
@@ -16,9 +17,9 @@ export class Loader {
         exec(`mkdir ${__dirname}/.css`);
     }
 
-    loadSass(...filenames: string[]) {
+    loadGlobalSass(...filenames: string[]) {
         for (let filename of filenames) {
-            const cmd = `npx sass --no-source-map ${filename} ${__dirname}/.css/${this.stylesheets++}.css`;
+            const cmd = `npx sass --no-source-map ${filename} ${__dirname}/.css/.${this.stylesheets++}.css`;
             exec(cmd);
         }
     }
@@ -55,8 +56,8 @@ export class Loader {
         return this.notificationPopupTimeout;
     }
 
-    transpileStylesheets() {
-        exec('node scripts/transpile-scss.js');
+    async compileGlobalStylesheets() {
+        await exec('node scripts/transpile-scss.js global');
     }
 }
 
@@ -74,11 +75,15 @@ const entrypoints = (env.ENTRY as string).split(',').filter(e => e).map(e => e.t
 const loader = new Loader();
 (globalThis as any).loader = loader;
 
+const completeCallbacks: (() => void)[] = [];
+
 for (let entrypoint of entrypoints) {
     try {
-        console.log(`Loading ${entrypoint}`);
         const entry = (await import(entrypoint)).default as (loader: Loader) => Promise<void>;
-        await entry(loader);
+        const callback = await entry(loader);
+        if (typeof callback == 'function') {
+            completeCallbacks.push(callback);
+        }
         console.log(`Loaded ${entrypoint}`);
     } catch (e) {
         console.log(`Failed to load ${entrypoint}`);
@@ -86,14 +91,29 @@ for (let entrypoint of entrypoints) {
     }
 }
 
-console.log(`Transpiling stylesheets...`);
-loader.transpileStylesheets();
-console.log(`Transpiled stylesheets`);
 
+console.log('Compiling stylesheets...');
+await loader.compileGlobalStylesheets();
+const themes = Array.from(Themes.themes.values());
+for (let theme of themes) {
+    await Themes.compileStylesheets(theme);
+}
+console.log('Compiled stylesheets.');
+
+
+const windows = loader.getWindows();
+console.log(`Loading ${windows.length} windows:`);
+for (let window of windows) {
+    console.log(` - ${window.name}`);
+}
+
+for (let callback of completeCallbacks) {
+    callback();
+}
 
 export default {
-    style: __dirname + '/.css/out.css',
-    windows: loader.getWindows(),
+    style: './.css/global.css',
+    windows: windows,
     closeWindowDelay: loader.getWindowCloseDelays(),
     notificationPopupTimeout: loader.getNotificationPopupTimeout()
 }

@@ -2,12 +2,12 @@ import { Loader } from "../src/Load";
 import { VolumeSliders } from "../src/widget/VolumeSliders";
 import { Hook as VMHook, VirtualMachines } from "../src/widget/VirtualMachines.js";
 // @ts-ignore
-import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
+import { execAsync, exec } from 'resource:///com/github/Aylur/ags/utils.js';
 import * as Eags from "eags";
-import { NetworkUsage } from "../src/widget/NetworkUsage";
-import { formatFileSize } from "../src/Utils";
 import { MediaSection } from "../src/widget/MediaSection";
-import { SimpleButton } from "../src/widget/SimpleButton";
+import { ThemeSelector } from "../src/widget/ThemeSelector";
+import { Themes } from "../src/service/Themes";
+
 
 let vmHook: VMHook;
 const vms = VirtualMachines({
@@ -54,8 +54,10 @@ const startMenu = (monitor: number) => Eags.Window({
     anchor: ['top', 'right'],
     monitor,
     className: 'window',
-    margin: [10, 10, 0, 0],
+    margin: [65, 10, 0, 0],
     name: `E-StartMenu-${monitor}`,
+    popup: true,
+    focusable: true,
     child: Eags.Box({
         className: 'startMenu',
         vertical: true,
@@ -68,20 +70,52 @@ const startMenu = (monitor: number) => Eags.Window({
                 },
                 filter: stream => stream.name != 'Scream' || stream.description != 'Virtual Machine'
             }),
-            NetworkUsage({
-                interface: 'eno1',
-                receiveLabel: speed => ` ${formatFileSize(speed)}`,
-                sendLabel: speed => ` ${formatFileSize(speed)}`,
-                props: {
-                    halign: 'center'
-                }
-            }),
-            MediaSection()
+            MediaSection(),
+            ThemeSelector()
         ]
     })
 })
 
+Themes.onChange(theme => {
+    const themeDir = `/home/eyezah/Desktop/Themes/${theme.id}`;
+
+    const setW0 = (globalThis as any).setW0 as (path: string) => void;
+    setW0(`${themeDir}/wallpaper-0.jpg`);
+    const setW1 = (globalThis as any).setW1 as (path: string) => void;
+    setW1(`${themeDir}/wallpaper-1.jpg`);
+
+    exec(`wal -f ${themeDir}/theme-1.json`);
+    exec(`pywalfox update`);
+    exec(`./default/generate-chromium.sh`);
+});
+
+Themes.addThemes({
+    id: 'mountains',
+    name: 'Mountains',
+    stylesheets: [
+        'default/themes/mountains.scss'
+    ]
+}, {
+    id: 'forest',
+    name: 'Forest',
+    stylesheets: [
+        'default/themes/forest.scss'
+    ]
+}, {
+    id: 'vaporwave',
+    name: 'Vaporwave',
+    stylesheets: [
+        'default/themes/vaporwave.scss'
+    ]
+});
+
+
+
 
 export default function(loader: Loader) {
     loader.loadWindows(startMenu(0));
+
+    return () => {
+        Themes.setTheme('mountains');
+    }
 }

@@ -58,7 +58,7 @@ export interface Props {
 
 export const MediaPlayer = (player: Player, props: Props = {}) => {
     let destroyed = false;
-    const blurArgs = ['-blur', '0x12', '-brightness-contrast', '-20'];
+    const blurArgs = ['-blur', '0x12', '-brightness-contrast', '-50'];
 
     const coverPath = player.coverPath && checkImageConversion(player.coverPath, ...blurArgs) || null;
 
