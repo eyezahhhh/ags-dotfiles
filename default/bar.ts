@@ -6,6 +6,7 @@ import { NetworkUsage } from "../src/widget/NetworkUsage";
 import { formatFileSize } from "../src/Utils";
 // @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
+import { MediaPopup } from "../src/window/MediaPopup";
 
 const mainBar = Eags.Window({
     anchor: ["top", "left", "right"],
@@ -54,6 +55,22 @@ const secondBar = Eags.Window({
     })
 });
 
+const mediaPopup = MediaPopup({
+    monitor: 0,
+    apps: [
+        {
+            icon: '/home/eyezah/.config/ags/assets/media-apps/pipe-bomb.png',
+            command: 'chromium https://pipebomb.net'
+        },
+        {
+            icon: '/usr/share/icons/hicolor/32x32/apps/vlc.png',
+            command: 'vlc'
+        }
+    ]
+});
+
 export default function(loader: Loader) {
-    loader.loadWindows(mainBar, secondBar);
+    loader.loadWindows(true, mainBar, secondBar, mediaPopup);
+    // @ts-ignore
+    mediaPopup.hide();
 }

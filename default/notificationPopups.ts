@@ -11,6 +11,6 @@ const popups = NotificationPopups({
 });
 
 export default function(loader: Loader) {
-    loader.loadWindows(popups);
+    loader.loadWindows(true, popups);
     loader.setNotificationPopupTimeout(10_000);
 }

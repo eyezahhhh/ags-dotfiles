@@ -47,7 +47,7 @@ const powerMenu = PowerPopup({
 });
 
 export default function(loader: Loader) {
-    loader.loadWindows(powerMenu.popup);
+    loader.loadWindows(false, powerMenu.popup);
 }
 
 // @ts-ignore

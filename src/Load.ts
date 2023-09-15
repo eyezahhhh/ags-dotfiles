@@ -11,6 +11,7 @@ export class Loader {
     private stylesheets = 0;
     private readonly windowDelays: {[name: string]: number} = {};
     private notificationPopupTimeout = 5000;
+    private readonly showOnLoad: WindowClass[] = [];
 
     constructor() {
         exec(`rm -rf ${__dirname}/.css`);
@@ -24,8 +25,15 @@ export class Loader {
         }
     }
 
-    loadWindows(...windows: WindowClass[]) {
+    loadWindows(show: boolean, ...windows: WindowClass[]) {
         for (let window of windows) {
+            // @ts-ignore
+            window.hide();
+            
+            if (show && !this.showOnLoad.includes(window)) {
+                this.showOnLoad.push(window);
+            }
+
             if (!this.windows.includes(window)) {
                 this.windows.push(window);
             }
@@ -58,6 +66,13 @@ export class Loader {
 
     async compileGlobalStylesheets() {
         await exec('node scripts/transpile-scss.js global');
+    }
+
+    showWindows() {
+        for (let window of this.showOnLoad) {
+            // @ts-ignore
+            window.show();
+        }
     }
 }
 
@@ -107,13 +122,15 @@ for (let window of windows) {
     console.log(` - ${window.name}`);
 }
 
-for (let callback of completeCallbacks) {
-    callback();
-}
-
 export default {
     style: './.css/global.css',
     windows: windows,
     closeWindowDelay: loader.getWindowCloseDelays(),
     notificationPopupTimeout: loader.getNotificationPopupTimeout()
+}
+
+loader.showWindows();
+
+for (let callback of completeCallbacks) {
+    callback();
 }

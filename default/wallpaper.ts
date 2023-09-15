@@ -13,5 +13,5 @@ const w1 = Wallpaper({
 
 
 export default function(loader: Loader) {
-    loader.loadWindows(w0.window, w1.window);
+    loader.loadWindows(true, w0.window, w1.window);
 }

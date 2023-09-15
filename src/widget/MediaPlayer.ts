@@ -2,35 +2,10 @@ import { Box, BoxClass, Label } from "eags"
 import { checkImageConversion, convertImage, dcc } from "../Utils"
 import { Image } from "./Image"
 import { SimpleButton } from "./SimpleButton"
+import { Player } from "./MediaComponents";
 
-export class Player {
-    busName: string
-    name: string
-    identity: string
-    entry: string
-    trackArtists: []
-    trackTitle: string
-    trackCoverUrl: string
-    coverPath: string
-    playBackStatus: 'Playing' | 'Paused' | 'Stopped'
-    canGoNext: boolean
-    canGoPrev: boolean
-    canPlay: boolean
-    shuffleStatus: boolean
-    loopStatus: 'None' | 'Track' | 'Playlist'
-    volume: number
-    length: number
-    position: number
-    playPause: () => void
-    play: () => void
-    stop: () => void
-    next: () => void
-    previous: () => void
-    shuffle: () => void
-    loop: () => void
-}
 
-function convertArtists(artists: string[]) {
+export function convertArtists(artists: string[]) {
     if (!artists.length) {
         return '';
     }

@@ -113,9 +113,9 @@ Themes.addThemes({
 
 
 export default function(loader: Loader) {
-    loader.loadWindows(startMenu(0));
+    loader.loadWindows(false, startMenu(0));
 
     return () => {
-        Themes.setTheme('mountains');
+        Themes.setTheme('forest');
     }
 }

@@ -12,6 +12,10 @@
     &:hover {
         color: $foreground-accent;
     }
+
+    &.E-Button-disabled {
+        opacity: 0.5;
+    }
 }
 
 .E-SimpleButton {
@@ -310,7 +314,8 @@
     border: $border-md solid $foreground-accent;
     padding: 10px;
     border-radius: $radius-lg;
-    background-size: 100% 100%;
+    background-size: 100%;
+    background-position: center;
     min-width: 400px;
     color: $foreground-focus;
 
@@ -372,6 +377,90 @@
     .E-Wallpaper-inner {
         .E-Wallpaper-image {
             background-position: center;
+        }
+    }
+}
+
+
+
+.E-MediaPopup {
+    border-radius: 0 0 $radius-md $radius-md;
+    background: $background;
+    color: $foreground;
+
+    .E-MediaPopup-inner {
+        border-style: solid;
+        border-width: $border-md;
+        border-color: $foreground-accent;
+        border-radius: 0 0 $radius-md $radius-md;
+        border-top: none;
+        min-width: 400px;
+
+        .E-MediaPopup-notice {
+            padding: 10px;
+        }
+
+        .E-MediaPopup-app {
+            margin: 10px;
+            background: transparent;
+        }
+
+        .E-MediaPopup-peek {
+            padding: 5px 20px 10px 20px;
+
+            .E-MediaPopup-peek-title {
+                margin-right: 20px;
+                font-weight: 500;
+            }
+        }
+
+        .E-MediaPopup-extra {
+            padding: 20px;
+            background-size: 100%;
+            background-position: center;
+            border-radius: 0 0 ($radius-md - $border-md) ($radius-md - $border-md);
+
+            .E-MediaPopup-close {
+                padding: 0;
+                background: transparent;
+                margin-top: 10px;
+                border-color: transparent;
+                border-width: $border-sm;
+
+                &:hover, &:active, &:focus {
+                    border: $border-sm solid $foreground-accent;
+                }
+            }
+
+            .E-MediaPopup-extra-cover {
+                border-radius: $radius-md;
+                margin-right: 10px;
+            }
+
+            .E-MediaPopup-extra-title {
+                font-weight: bold;
+                font-size: 1.2rem;
+            }
+
+            .E-MediaPopup-entry-bar {
+                margin-top: 10px;
+
+                .E-MediaPopup-extra-button {
+                    background: transparent;
+                    border-color: transparent;
+    
+                    &:hover, &:focus, &:active {
+                        border-color: $foreground-accent;
+                        background: $background;
+                    }
+                }
+
+                .E-MediaPopup-entry-app {
+                    label {
+                        margin-right: 10px;
+                    }
+                }
+            }
         }
     }
 }
