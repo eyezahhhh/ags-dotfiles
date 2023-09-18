@@ -119,7 +119,7 @@ console.log('Compiled stylesheets.');
 const windows = loader.getWindows();
 console.log(`Loading ${windows.length} windows:`);
 for (let window of windows) {
-    console.log(` - ${window.name}`);
+    console.log(`- ${window.name}`);
 }
 
 export default {
@@ -134,3 +134,5 @@ loader.showWindows();
 for (let callback of completeCallbacks) {
     callback();
 }
+
+console.log('Done!');

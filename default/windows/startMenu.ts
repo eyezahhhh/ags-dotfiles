@@ -1,12 +1,12 @@
-import { Loader } from "../src/Load";
-import { VolumeSliders } from "../src/widget/VolumeSliders";
-import { Hook as VMHook, VirtualMachines } from "../src/widget/VirtualMachines.js";
+import { Loader } from "../../src/Load";
+import { VolumeSliders } from "../../src/widget/VolumeSliders";
+import { Hook as VMHook, VirtualMachines } from "../../src/widget/VirtualMachines.js";
 // @ts-ignore
 import { execAsync, exec } from 'resource:///com/github/Aylur/ags/utils.js';
 import * as Eags from "eags";
-import { MediaSection } from "../src/widget/MediaSection";
-import { ThemeSelector } from "../src/widget/ThemeSelector";
-import { Themes } from "../src/service/Themes";
+import { MediaSection } from "../../src/widget/MediaSection";
+import { ThemeSelector } from "../../src/widget/ThemeSelector";
+import { Themes } from "../../src/service/Themes";
 
 
 let vmHook: VMHook;
@@ -116,6 +116,8 @@ export default function(loader: Loader) {
     loader.loadWindows(false, startMenu(0));
 
     return () => {
-        Themes.setTheme('forest');
+        Themes.setFromFile().catch(() => {
+            Themes.setTheme('mountains'); // default to mountains theme if couldn't load from file
+        });
     }
 }

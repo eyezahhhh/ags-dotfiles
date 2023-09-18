@@ -1,5 +1,5 @@
-import { Loader } from "../src/Load";
-import { Wallpaper } from "../src/window/Wallpaper";
+import { Loader } from "../../src/Load";
+import { Wallpaper } from "../../src/window/Wallpaper";
 
 const w0 = Wallpaper({
     monitor: 0

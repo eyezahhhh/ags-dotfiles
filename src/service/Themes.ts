@@ -1,7 +1,7 @@
 // @ts-ignore
 import { Service } from 'resource:///com/github/Aylur/ags/service.js';
 // @ts-ignore
-import { execAsync, exec } from 'resource:///com/github/Aylur/ags/utils.js';
+import { execAsync, exec, writeFile, readFileAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 // @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
 
@@ -72,8 +72,23 @@ export class Themes {
         // @ts-ignore
         this.instance.emit('changed');
 
+        writeFile(id, '.theme.txt');
+
+
+
         for (let listener of this.listeners) {
             listener(theme);
+        }
+    }
+
+    static async setFromFile() {
+        try {
+            const id = await readFileAsync('.theme.txt');
+            if (id && this.instance.themes.has(id)) {
+                this.setTheme(id);
+            }
+        } catch {
+            throw 'Failed to load theme from file.';
         }
     }
 

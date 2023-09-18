@@ -9,7 +9,7 @@ exec("pwd", async (error, dir) => {
 
     const command = `ags`;
     const options = ['-c', `${dir.trim()}/dist/src/Load.js`];
-    console.log(`Starting AGS... (${command})`);
+    console.log(`Starting AGS... (${command} ${options.join(' ')})`);
 
     const ags = spawn(command, options, {
         stdio: [process.stdin, process.stdout, process.stderr]

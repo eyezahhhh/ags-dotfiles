@@ -159,7 +159,7 @@
                 background: $background;
                 min-height: 1rem;
                 min-width: 1rem;
-                border-radius: 0.5rem;
+                border-radius: $radius-sm;
                 border: $border-sm solid $foreground-accent;
     
                 slider {
@@ -168,7 +168,7 @@
             
                 highlight {
                     background: $foreground-accent;
-                    border-radius: 0.5rem;
+                    border-radius: $radius-sm - $border-sm;
                     border: none;
                     min-width: 1rem;
                     min-height: 1rem;
@@ -461,6 +461,30 @@
                     }
                 }
             }
+        }
+    }
+}
+
+
+
+.E-Clipboard {
+    .E-Popup-outer {
+        padding-top: 0;
+    }
+
+    .E-Clipboard-secret {
+        background: $background;
+        color: $foreground;
+        border: $border-sm solid transparent;
+        margin-top: 10px;
+
+        &:active, &:focus {
+            background: $foreground-accent;
+            color: $background;
+        }
+
+        &:hover, &:active, &:focus {
+            border: $border-sm solid $foreground-accent;
         }
     }
 }

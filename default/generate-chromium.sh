@@ -2,7 +2,7 @@
 
 . ~/.cache/wal/colors.sh # import colors from pywal
 
-THEME_NAME="Pywal"
+THEME_NAME="../.chrome-pywal"
 
 
 DIR=$(dirname "${BASH_SOURCE[0]}")

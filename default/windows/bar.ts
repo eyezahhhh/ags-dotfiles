@@ -1,12 +1,11 @@
-import { Loader } from "../src/Load";
+import { Loader } from "../../src/Load";
 import * as Eags from "eags";
-import { HyprlandWorkspaces } from "../src/widget/HyprlandWorkspaces";
-import { DateTime } from "../src/widget/DateTime";
-import { NetworkUsage } from "../src/widget/NetworkUsage";
-import { formatFileSize } from "../src/Utils";
+import { HyprlandWorkspaces } from "../../src/widget/HyprlandWorkspaces";
+import { DateTime } from "../../src/widget/DateTime";
 // @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
-import { MediaPopup } from "../src/window/MediaPopup";
+import { MediaPopup } from "../../src/window/MediaPopup";
+
 
 const mainBar = Eags.Window({
     anchor: ["top", "left", "right"],
@@ -69,8 +68,10 @@ const mediaPopup = MediaPopup({
     ]
 });
 
+
+
+
+
 export default function(loader: Loader) {
     loader.loadWindows(true, mainBar, secondBar, mediaPopup);
-    // @ts-ignore
-    mediaPopup.hide();
 }

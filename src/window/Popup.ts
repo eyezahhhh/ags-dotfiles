@@ -1,4 +1,4 @@
-import { Box, Label, Revealer, RevealerClass, RevealerTransition, Widget, Window, WindowClass } from "eags";
+import { Box, BoxClass, Label, Revealer, RevealerClass, RevealerTransition, Widget, Window, WindowClass } from "eags";
 import { dcc } from "../Utils";
 // @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
@@ -11,25 +11,27 @@ export interface Props {
     name?: string
     props?: Partial<WindowClass>
     transition?: RevealerTransition
+    innerProps?: Partial<BoxClass>
 }
 
 export const Popup = (props: Props) => {
     const name = props.name || `E-Popup-${popupCount++}`;
 
     const window = Window({
-        ...props.props,
+        popup: true,
+        focusable: true,
         anchor: [],
+        ...props.props,
         monitor: props.monitor,
         name: name,
         className: 'E-Popup' + dcc(props.props?.className),
-        popup: true,
-        focusable: true,
         child: Box({
             className: 'E-Popup-outer',
             children: [
                 Revealer({
                     transition: props.transition || 'none',
                     child: Box({
+                        ...props.innerProps,
                         className: 'E-Popup-inner',
                         children: props.children
                     }),

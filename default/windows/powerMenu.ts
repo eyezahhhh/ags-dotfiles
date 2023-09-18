@@ -1,5 +1,5 @@
-import { Loader } from "../src/Load";
-import { PowerPopup } from "../src/window/PowerPopup";
+import { Loader } from "../../src/Load";
+import { PowerPopup } from "../../src/window/PowerPopup";
 // @ts-ignore
 import { exec } from 'resource:///com/github/Aylur/ags/utils.js';
 
@@ -49,6 +49,3 @@ const powerMenu = PowerPopup({
 export default function(loader: Loader) {
     loader.loadWindows(false, powerMenu.popup);
 }
-
-// @ts-ignore
-globalThis.setPowerMenuOpen = powerMenu.setOpen;

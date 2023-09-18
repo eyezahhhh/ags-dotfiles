@@ -1,5 +1,5 @@
-import { Loader } from "../src/Load";
-import { NotificationPopups } from "../src/widget/NotificationPopups";
+import { Loader } from "../../src/Load";
+import { NotificationPopups } from "../../src/widget/NotificationPopups";
 
 const popups = NotificationPopups({
     anchor: ['bottom', 'right'],
