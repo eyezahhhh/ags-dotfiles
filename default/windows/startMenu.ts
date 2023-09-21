@@ -1,11 +1,12 @@
 import { Loader } from "../../src/Load";
 import { VolumeSliders } from "../../src/widget/VolumeSliders";
 import { Hook as VMHook, VirtualMachines } from "../../src/widget/VirtualMachines.js";
-import { execAsync, exec } from 'resource:///com/github/Aylur/ags/utils.js';
+import { execAsync, exec, readFileAsync, writeFileAsync, writeFile, CACHE_DIR } from 'resource:///com/github/Aylur/ags/utils.js';
 import { MediaSection } from "../../src/widget/MediaSection";
 import { ThemeSelector } from "../../src/widget/ThemeSelector";
 import { Themes } from "../../src/service/Themes";
 import { Box, Window } from "resource:///com/github/Aylur/ags/widget.js";
+import { getLoggedInUser } from "../../src/Utils";
 
 
 let vmHook: VMHook;
@@ -83,6 +84,10 @@ Themes.onChange(theme => {
     const setW1 = (globalThis as any).setW1 as (path: string) => void;
     setW1(`${themeDir}/wallpaper-1.jpg`);
 
+    readFileAsync(`${themeDir}/hyprland.conf`).then(contents => {
+        writeFile(contents, `/home/${getLoggedInUser()}/.config/hypr/theme.conf`);
+    });
+
     exec(`wal -f ${themeDir}/theme-1.json`);
     exec(`pywalfox update`);
     exec(`./default/generate-chromium.sh`);
@@ -105,6 +110,12 @@ Themes.addThemes({
     name: 'Vaporwave',
     stylesheets: [
         'default/themes/vaporwave.scss'
+    ]
+}, {
+    id: 'cement',
+    name: 'Cement',
+    stylesheets: [
+        'default/themes/cement.scss'
     ]
 });
 

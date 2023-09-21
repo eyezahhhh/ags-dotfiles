@@ -90,3 +90,10 @@ export async function convertImage(path: string, ...args: string[]) {
         return null;
     }
 }
+
+export function getLoggedInUser() {
+    const parts = CACHE_DIR.split('/');
+    if (parts[0] == '' && parts[1] == 'home' && parts.length > 2) {
+        return parts[2];
+    }
+}

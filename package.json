@@ -8,7 +8,7 @@
     "build": "npm run clean && npx tsc && npm run tsc-alias",
     "start": "node scripts/start.js",
     "tsc-alias": "npx tsc scripts/replacer.ts --module commonjs --target es2017 && npx tsc-alias",
-    "dev": "npm run build && npx tsc-watch --onSuccess \"npm run dev:end\"",
+    "dev": "npm run build && npx tsc-watch --onSuccess \"npx nodemon\"",
     "dev:end": "npx tsc-alias && npm run start"
   },
   "author": "eyezah",
@@ -20,6 +20,7 @@
     "@rauschma/stringio": "^1.4.0",
     "@types/node": "^20.5.9",
     "chalk": "^4.1.2",
+    "nodemon": "^3.0.1",
     "rimraf": "^5.0.1",
     "sass": "^1.66.1",
     "ts-node": "^10.9.1",

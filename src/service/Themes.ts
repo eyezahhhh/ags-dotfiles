@@ -65,9 +65,14 @@ export class Themes {
         this.current = id;
         App.resetCss();
         App.applyCss('.css/global.css');
-        App.applyCss(this.getStylesheet());
+        console.log('Applying css...');
+        try {
+            App.applyCss(this.getStylesheet());
+        } catch (e) {
+            console.error(e);
+        }
+        
         this.instance.emit('changed');
-
         writeFile(id, '.theme.txt');
 
 
