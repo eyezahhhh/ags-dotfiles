@@ -1,31 +1,16 @@
-import { Box, Button, CenterBox, Label, Revealer, RevealerTransition } from "eags";
+import { Box, Button, CenterBox, Label, Revealer, RevealerTransition } from "resource:///com/github/Aylur/ags/widget.js";
 import { Image } from "./Image";
 import { SimpleButton } from "./SimpleButton";
-// @ts-ignore
-import Notifications from 'resource:///com/github/Aylur/ags/service/notifications.js';
-
-export class NotificationType {
-    id: number
-    appName: string
-    appEntry: string
-    appIcon: string
-    summary: string
-    body: string
-    actions: { id: string, label: string }[]
-    urgency: 'low' | 'normal' | 'critical'
-    time: number
-    image: string | null
-}
+import Notifications, { Notification as AgsNotification} from 'resource:///com/github/Aylur/ags/service/notifications.js';
 
 export interface Props {
     transition?: RevealerTransition | null
 }
 
-export const Notification = (notification: NotificationType, props: Props = {}) => {
+export const Notification = (notification: AgsNotification, props: Props = {}) => {
     let destroyed = false;
 
     const revealer = Revealer({
-        // @ts-ignore
         revealChild: !props.transition,
         transition: props.transition || 'none',
         child: Box({
@@ -68,7 +53,7 @@ export const Notification = (notification: NotificationType, props: Props = {}) 
                                     label: action.label
                                 }),
                                 className: 'E-Button',
-                                onClicked: () => Notifications.invoke(notification.id, action.id)
+                                onClicked: () => Notifications.invoke(notification.id, action.action)
                             }))
                         })
                     ]
@@ -83,7 +68,6 @@ export const Notification = (notification: NotificationType, props: Props = {}) 
     if (props.transition) {
         setTimeout(() => {
             if (!destroyed) {
-                // @ts-ignore
                 revealer.revealChild = true;
             }
         })

@@ -1,13 +1,12 @@
-import { Box, BoxClass, Label } from "eags";
 import { Virsh } from "../service/Virsh";
 import { VirtualMachine, Props as VMProps } from "./VirtualMachine";
-import { cc, dcc } from "../Utils";
+import { dcc } from "../Utils";
 import { Props as ScaleProps } from "./Scale";
-// @ts-ignore
 import Audio from 'resource:///com/github/Aylur/ags/service/audio.js';
 import { AudioStream, VolumeSlider } from "./VolumeSlider";
 import { SimpleButton, Props as ButtonProps } from "./SimpleButton";
 import { VirtualMachine as VM } from "../service/Virsh";
+import { Box, BoxArgs, Label } from "resource:///com/github/Aylur/ags/widget.js";
 
 export class Hook {
     setEnabled: (enabled: boolean) => void
@@ -15,7 +14,7 @@ export class Hook {
 }
 
 export interface Props {
-    props?: Partial<BoxClass>
+    props?: Partial<BoxArgs>
     childProps?: VMProps
     filter?: (id: string) => boolean
     className?: string
@@ -41,12 +40,11 @@ export const VirtualMachines = (props: Props = {}) => {
             const filter = props.filter!;
             vms = vms.filter(vm => filter(vm.id));
         }
-        // @ts-ignore
+        // @ts-expect-error
         vms.sort((a, b) => a.id.toLowerCase() > b.id.toLowerCase());
         vmList = vms;
 
-        // @ts-ignore
-        list.children?.forEach(c => c.destroy());
+        list.children?.forEach(c => c?.destroy());
 
         if (vms.length) {
             list.children = vms.map(vm => VirtualMachine(vm, {

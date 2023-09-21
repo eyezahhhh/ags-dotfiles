@@ -1,4 +1,4 @@
-import { Box, BoxClass, Label } from "eags";
+import { Box, BoxArgs, Label } from "resource:///com/github/Aylur/ags/widget.js";
 import { NetworkSpeed } from "../service/NetworkSpeed";
 import { cc, dcc, formatFileSize } from "../Utils";
 
@@ -10,7 +10,7 @@ export interface Props {
     sendClassName?: string
     receiveClassName?: string
     noticeClassName?: string
-    props?: Partial<BoxClass>
+    props?: Partial<BoxArgs>
 }
 
 export const NetworkUsage = (props: Props) => Box({

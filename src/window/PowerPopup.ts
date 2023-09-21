@@ -1,8 +1,7 @@
 import { Popup } from "./Popup";
 import { LargeButton, Props as ButtonProps } from "../widget/LargeButton";
-// @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
-import { BoxClass, RevealerTransition } from "eags";
+import { RevealerTransition } from "resource:///com/github/Aylur/ags/widget.js";
 
 export interface Props {
     monitor: number
@@ -22,11 +21,9 @@ export const PowerPopup = (props: Props) => {
         },
         innerProps: {
             connections: [
-                // @ts-ignore
-                [App, (box: BoxClass, name: string) => {
+                [App, (box, name: string) => {
                     if (props.focusedButton && name == popup.name) {
                         const childToFocus = box.children?.[props.focusedButton] || null;
-                        // @ts-ignore
                         childToFocus?.grab_focus();
                     }
                 }]

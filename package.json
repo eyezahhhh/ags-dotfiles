@@ -14,8 +14,7 @@
   "author": "eyezah",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.3.1",
-    "eags": "github:eyezahhhh/eags"
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@rauschma/stringio": "^1.4.0",

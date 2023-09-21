@@ -1,4 +1,3 @@
-// @ts-ignore
 import { exec, execAsync, CACHE_DIR, ensureDirectory } from 'resource:///com/github/Aylur/ags/utils.js';
 import { registerPath, testPathCache, testPaths } from './FileIndex';
 

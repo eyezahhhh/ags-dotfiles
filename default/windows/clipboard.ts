@@ -1,6 +1,5 @@
 import { Loader } from "../../src/Load";
 import { Clipboard } from "../../src/window/Clipboard";
-// @ts-ignore
 import { exec, readFile } from 'resource:///com/github/Aylur/ags/utils.js';
 
 const clipboard = Clipboard({

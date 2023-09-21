@@ -1,12 +1,11 @@
 import { Loader } from "../../src/Load";
 import { VolumeSliders } from "../../src/widget/VolumeSliders";
 import { Hook as VMHook, VirtualMachines } from "../../src/widget/VirtualMachines.js";
-// @ts-ignore
 import { execAsync, exec } from 'resource:///com/github/Aylur/ags/utils.js';
-import * as Eags from "eags";
 import { MediaSection } from "../../src/widget/MediaSection";
 import { ThemeSelector } from "../../src/widget/ThemeSelector";
 import { Themes } from "../../src/service/Themes";
+import { Box, Window } from "resource:///com/github/Aylur/ags/widget.js";
 
 
 let vmHook: VMHook;
@@ -50,7 +49,7 @@ const vms = VirtualMachines({
     ]
 });
 
-const startMenu = (monitor: number) => Eags.Window({
+const startMenu = (monitor: number) => Window({
     anchor: ['top', 'right'],
     monitor,
     className: 'window',
@@ -58,7 +57,7 @@ const startMenu = (monitor: number) => Eags.Window({
     name: `E-StartMenu-${monitor}`,
     popup: true,
     focusable: true,
-    child: Eags.Box({
+    child: Box({
         className: 'startMenu',
         vertical: true,
         children: [

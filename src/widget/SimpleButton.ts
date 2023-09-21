@@ -1,10 +1,10 @@
-import { Button, ButtonClass, Label } from "eags";
-import { cc, dcc } from "../Utils";
+import { Button, ButtonArgs, Label } from "resource:///com/github/Aylur/ags/widget.js";
+import { dcc } from "../Utils";
 
 export interface Props {
     label: string
     labelClassName?: string
-    props?: Partial<ButtonClass>
+    props?: Partial<ButtonArgs>
 }
 
 export const SimpleButton = (props: Props) => Button({

@@ -1,9 +1,7 @@
-// @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
-// @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-import { Box, BoxClass, Button, Label, RevealerTransition } from "eags"
 import { Popup } from './Popup';
+import { BoxType, Button, Label, RevealerTransition } from 'resource:///com/github/Aylur/ags/widget.js';
 
 export interface Secret  {
     name: string
@@ -29,11 +27,9 @@ export const Clipboard = (props: Props) => {
         innerProps: {
             vertical: true,
             connections: [
-                // @ts-ignore
-                [App, (box: BoxClass, name: string) => {
+                [App, (box: BoxType, name: string) => {
                     if (props.focusedEntry !== undefined && name == popup.name) {
                         const childToFocus = box.children?.[props.focusedEntry] || null;
-                        // @ts-ignore
                         childToFocus?.grab_focus();
                     }
                 }]

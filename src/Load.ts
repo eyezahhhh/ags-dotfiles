@@ -1,17 +1,16 @@
-// @ts-ignore
 import { exec } from 'resource:///com/github/Aylur/ags/utils.js';
-import { WindowClass } from "eags";
 import { getEnvs } from "./Utils";
 import { Themes } from './service/Themes';
+import { WindowType } from 'resource:///com/github/Aylur/ags/widget.js';
 
 const __dirname = exec("pwd");
 
 export class Loader {
-    private windows: WindowClass[] = [];
+    private windows: WindowType[] = [];
     private stylesheets = 0;
     private readonly windowDelays: {[name: string]: number} = {};
     private notificationPopupTimeout = 5000;
-    private readonly showOnLoad: WindowClass[] = [];
+    private readonly showOnLoad: WindowType[] = [];
 
     constructor() {
         exec(`rm -rf ${__dirname}/.css`);
@@ -25,9 +24,8 @@ export class Loader {
         }
     }
 
-    loadWindows(show: boolean, ...windows: WindowClass[]) {
+    loadWindows(show: boolean, ...windows: WindowType[]) {
         for (let window of windows) {
-            // @ts-ignore
             window.hide();
             
             if (show && !this.showOnLoad.includes(window)) {
@@ -40,7 +38,7 @@ export class Loader {
         }
     }
 
-    setWindowCloseDelay(window: WindowClass | string, ms: number) {
+    setWindowCloseDelay(window: WindowType | string, ms: number) {
         if (typeof window != 'string') {
             window = window.name!;
         }
@@ -70,7 +68,6 @@ export class Loader {
 
     showWindows() {
         for (let window of this.showOnLoad) {
-            // @ts-ignore
             window.show();
         }
     }

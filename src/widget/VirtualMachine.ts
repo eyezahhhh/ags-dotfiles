@@ -1,4 +1,4 @@
-import { Box, Button, Label } from "eags";
+import { Box, Button, Label } from "resource:///com/github/Aylur/ags/widget.js";
 import { VirtualMachine as VM, VirtualMachineState } from "../service/Virsh";
 import { cc, dcc, wait } from "../Utils";
 import { Image } from "./Image";
@@ -64,7 +64,7 @@ export const VirtualMachine = (vm: VM, props: Props = {}) => {
     let loading = false;
     const buttonLabel = action ? Label({
         label: props.buttonLabel ? props.buttonLabel(vm.state) : defaultButtonLabel(vm.state)
-    }) : null;
+    }) : undefined;
 
     return Box({
         className: 'E-VirtualMachine' + cc(props.enabled === false, 'E-VirtualMachine-disabled') + dcc(props.className),
@@ -94,7 +94,6 @@ export const VirtualMachine = (vm: VM, props: Props = {}) => {
                 ]
             }),
             action ? Button({
-                // @ts-ignore
                 child: buttonLabel,
                 className: 'E-VirtualMachine-button' + dcc(props.buttonClassName),
                 valign: 'center',

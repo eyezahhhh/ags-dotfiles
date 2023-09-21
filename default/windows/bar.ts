@@ -1,18 +1,17 @@
 import { Loader } from "../../src/Load";
-import * as Eags from "eags";
 import { HyprlandWorkspaces } from "../../src/widget/HyprlandWorkspaces";
 import { DateTime } from "../../src/widget/DateTime";
-// @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
 import { MediaPopup } from "../../src/window/MediaPopup";
+import { CenterBox, EventBox, Window } from "resource:///com/github/Aylur/ags/widget.js";
 
 
-const mainBar = Eags.Window({
+const mainBar = Window({
     anchor: ["top", "left", "right"],
     monitor: 0,
     className: "window",
     name: `E-Bar-primary`,
-    child: Eags.CenterBox({
+    child: CenterBox({
         className: "bar",
         startWidget: HyprlandWorkspaces({
             activeClassName: 'active',
@@ -21,7 +20,7 @@ const mainBar = Eags.Window({
                 halign: 'start'
             }
         }),
-        endWidget: Eags.EventBox({
+        endWidget: EventBox({
             child: DateTime(),
             halign: 'end',
             className: 'E-EventBox',
@@ -32,12 +31,12 @@ const mainBar = Eags.Window({
     })
 });
 
-const secondBar = Eags.Window({
+const secondBar = Window({
     anchor: ["top", "left", "right"],
     monitor: 1,
     className: "window",
     name: `E-Bar-secondary`,
-    child: Eags.CenterBox({
+    child: CenterBox({
         className: "bar",
         startWidget: HyprlandWorkspaces({
             activeClassName: 'active',

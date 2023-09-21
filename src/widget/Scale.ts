@@ -1,4 +1,5 @@
-import { Box, Slider as EagsSlider, EventBox, EventBoxClass, Label } from "eags";
+
+import { Box, EventBox, EventBoxArgs, Label, Slider } from "resource:///com/github/Aylur/ags/widget.js";
 import { cc, dcc } from "../Utils";
 
 export interface Props {
@@ -13,7 +14,7 @@ export interface Props {
     onChange?: (value: number) => (number | void)
     scrollIncrement?: number
     roundOnScroll?: number
-    props?: Partial<EventBoxClass>
+    props?: Partial<EventBoxArgs>
     min?: number
     max?: number
 }
@@ -31,7 +32,7 @@ export const Scale = (props: Props) => {
         className: 'E-Scale-label' + dcc(props.labelClassName)
     }) : null;
 
-    const slider = EagsSlider({
+    const slider = Slider({
         hexpand: !props.vertical,
         vexpand: !!props.vertical,
         max: props.max ?? 100,
@@ -40,12 +41,13 @@ export const Scale = (props: Props) => {
         drawValue: false,
         vertical: !!props.vertical,
         className: 'E-Scale-scale' + cc(props.vertical, 'E-Scale-vertical') + dcc(props.scaleClassName),
-        // @ts-ignore
         inverted: !!props.vertical,
-        // @ts-ignore
-        onChange: ({value}) => {
+        onChange: ({value}: {value: number}) => {
             if (props.onChange) {
-                value = props.onChange(value);
+                let newValue = props.onChange(value);
+                if (typeof newValue == "number") {
+                    value = newValue;
+                }
             }
             if (label) {
                 label.label = getLabel(value);

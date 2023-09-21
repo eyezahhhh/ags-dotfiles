@@ -1,4 +1,4 @@
-import { Box, Label, Overlay, Revealer, Window } from "eags";
+import { Box, Overlay, Revealer, Window } from "resource:///com/github/Aylur/ags/widget.js";
 
 export interface Props {
     monitor: number
@@ -7,7 +7,6 @@ export interface Props {
 }
 
 const revealer = (id: number) => Revealer({
-    // @ts-ignore
     revealChild: !id,
     transition: 'crossfade',
     className: 'E-Wallpaper-inner',
@@ -36,7 +35,6 @@ export const Wallpaper = (props: Props) => {
     function nextRevealer() {
         id = ++id % 2;
         setTimeout(() => {
-            // @ts-ignore
             revealers[1].revealChild = !!id;
         }, props.revealDelay || 100);
         return revealers[id];
@@ -48,7 +46,6 @@ export const Wallpaper = (props: Props) => {
         monitor: props.monitor,
         name: `E-Wallpaper-${props.monitor}`,
         className: 'E-Wallpaper',
-        // @ts-ignore
         style: props.wallpaper ? `background-image: url("${props.wallpaper}")` : undefined,
         child: overlay
     });
@@ -57,7 +54,6 @@ export const Wallpaper = (props: Props) => {
         window,
         setWallpaper: (wallpaper: string | null) => {
             const revealer = nextRevealer();
-            // @ts-ignore
             revealer.child!.style = wallpaper ? `background-image: url("${wallpaper}")` : ''
         }
     }

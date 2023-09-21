@@ -1,6 +1,6 @@
-import { ButtonClass, LabelClass } from "eags"
 import { SimpleButton } from "./SimpleButton"
 import { cc, dcc } from "../Utils"
+import { ButtonArgs, LabelType } from "resource:///com/github/Aylur/ags/widget.js"
 
 export class Player {
     busName: string
@@ -29,14 +29,14 @@ export class Player {
     loop: () => void
 }
 
-export const PlayPauseButton = (player: Player, props: Partial<ButtonClass> = {}) => SimpleButton({
+export const PlayPauseButton = (player: Player, props: Partial<ButtonArgs> = {}) => SimpleButton({
     label: '',
     props: {
         ...props,
         connections: [
             ...props?.connections || [],
             [player, button => {
-                const label = button.child as LabelClass;
+                const label = button.child as LabelType;
                 label.label = player.playBackStatus == 'Playing' ? '' : '';
             }]
         ],
@@ -44,7 +44,7 @@ export const PlayPauseButton = (player: Player, props: Partial<ButtonClass> = {}
     }
 });
 
-export const PreviousButton = (player: Player, props: Partial<ButtonClass> = {}) => {
+export const PreviousButton = (player: Player, props: Partial<ButtonArgs> = {}) => {
     const button = SimpleButton({
         label: '',
         props: {
@@ -59,11 +59,10 @@ export const PreviousButton = (player: Player, props: Partial<ButtonClass> = {})
         }
     });
 
-    const className = button.className!;
     return button;
 }
 
-export const NextButton = (player: Player, props: Partial<ButtonClass> = {}) => {
+export const NextButton = (player: Player, props: Partial<ButtonArgs> = {}) => {
     const button = SimpleButton({
         label: '',
         props: {
@@ -78,6 +77,5 @@ export const NextButton = (player: Player, props: Partial<ButtonClass> = {}) => 
         }
     });
 
-    const className = button.className!;
     return button;
 }

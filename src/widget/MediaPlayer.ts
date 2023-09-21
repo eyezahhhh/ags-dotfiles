@@ -1,8 +1,8 @@
-import { Box, BoxClass, Label } from "eags"
 import { checkImageConversion, convertImage, dcc } from "../Utils"
 import { Image } from "./Image"
 import { SimpleButton } from "./SimpleButton"
 import { Player } from "./MediaComponents";
+import { Box, BoxArgs, Label } from "resource:///com/github/Aylur/ags/widget.js";
 
 
 export function convertArtists(artists: string[]) {
@@ -28,7 +28,7 @@ export interface Props {
     titleClassName?: string
     artistsClassName?: string
     buttonsClassName?: string
-    props?: Partial<BoxClass>
+    props?: Partial<BoxArgs>
 }
 
 export const MediaPlayer = (player: Player, props: Props = {}) => {
@@ -40,7 +40,6 @@ export const MediaPlayer = (player: Player, props: Props = {}) => {
     const box = Box({
         ...props.props,
         className: 'E-MediaSection' + dcc(props.className),
-        // @ts-ignore
         style: coverPath ? `background-image: url("${coverPath}")` : undefined,
         hexpand: true,
         children: [
@@ -59,18 +58,14 @@ export const MediaPlayer = (player: Player, props: Props = {}) => {
                 children: [
                     Label({
                         className: 'E-MediaSection-title' + dcc(props.titleClassName),
-                        // @ts-ignore
                         xalign: 0,
                         label: player.trackTitle,
-                        // @ts-ignore
                         wrap: true,
                     }),
                     Label({
                         className: 'E-MediaSection-artist' + dcc(props.artistsClassName),
-                        // @ts-ignore
                         xalign: 0,
                         label: convertArtists(player.trackArtists),
-                        // @ts-ignore
                         wrap: true,
                     }),
                     Box({
@@ -107,7 +102,6 @@ export const MediaPlayer = (player: Player, props: Props = {}) => {
     if (player.coverPath && !coverPath) {
         convertImage(player.coverPath, ...blurArgs).then(path => {
             if (path && !destroyed) {
-                // @ts-ignore
                 box.style = `background-image: url("${path}")`;
             }
         });

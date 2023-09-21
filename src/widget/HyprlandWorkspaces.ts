@@ -1,9 +1,7 @@
-import { Box, BoxClass, Button, Label } from 'eags';
-// @ts-ignore
 import Hyprland from 'resource:///com/github/Aylur/ags/service/hyprland.js';
-// @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { cc, dcc } from '../Utils';
+import { Box, BoxArgs, Button, Label } from 'resource:///com/github/Aylur/ags/widget.js';
 
 /*
     box
@@ -31,7 +29,7 @@ export interface Props {
     populatedClassName?: string
     activeClassName?: string
     buttonContents?: (props: ButtonContentsProps) => string,
-    props?: Partial<BoxClass>
+    props?: Partial<BoxArgs>
 }
 
 export const HyprlandWorkspaces = (props: Props = {}) => Box({

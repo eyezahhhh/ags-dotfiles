@@ -1,8 +1,7 @@
-import { Box } from "eags";
-// @ts-ignore
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 import { MediaPlayer, Props as PlayerProps } from "./MediaPlayer";
 import { Player } from "./MediaComponents";
+import { Box } from 'resource:///com/github/Aylur/ags/widget.js';
 
 export interface Props {
     player?: string

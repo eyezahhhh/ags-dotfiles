@@ -1,7 +1,6 @@
-import { Box, BoxClass, Label } from 'eags'
-// @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-import { cc, dcc } from '../Utils';
+import { dcc } from '../Utils';
+import { Box, BoxArgs, Label } from 'resource:///com/github/Aylur/ags/widget.js';
 
 /*
     box
@@ -22,7 +21,7 @@ export interface Props {
     className?: string
     dateClassName?: string
     timeClassName?: string
-    props?: Partial<BoxClass>
+    props?: Partial<BoxArgs>
 }
 
 export const DateTime = (props: Props = {}) => Box({

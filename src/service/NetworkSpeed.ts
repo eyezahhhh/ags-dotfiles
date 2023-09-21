@@ -1,6 +1,4 @@
-// @ts-ignore
 import { Service } from 'resource:///com/github/Aylur/ags/service.js';
-// @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { wait } from '../Utils';
 
@@ -92,7 +90,6 @@ export class NetworkSpeedService extends Service {
             }
         }
 
-        // @ts-ignore
         this.emit('changed');
     }
 }
@@ -100,6 +97,7 @@ export class NetworkSpeedService extends Service {
 
 export class NetworkSpeed {
     static {
+        // @ts-expect-error
         Service['NetworkSpeed'] = this;
     }
 

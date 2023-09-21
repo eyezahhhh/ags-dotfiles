@@ -1,5 +1,5 @@
-import { Box, EventBox, Label } from "eags";
-import { Theme, Themes } from "../service/Themes";
+import { Box, EventBox, Label } from "resource:///com/github/Aylur/ags/widget.js";
+import { Themes } from "../service/Themes";
 
 export interface Props {
     

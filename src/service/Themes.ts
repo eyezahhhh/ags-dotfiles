@@ -1,8 +1,5 @@
-// @ts-ignore
 import { Service } from 'resource:///com/github/Aylur/ags/service.js';
-// @ts-ignore
 import { execAsync, exec, writeFile, readFileAsync } from 'resource:///com/github/Aylur/ags/utils.js';
-// @ts-ignore
 import App from 'resource:///com/github/Aylur/ags/app.js';
 
 const __dirname = exec("pwd");
@@ -23,6 +20,7 @@ export class ThemesService extends Service {
 
 export class Themes {
     static {
+        // @ts-expect-error
         Service['Themes'] = this;
     }
 
@@ -45,7 +43,6 @@ export class Themes {
             this.instance.themes.set(theme.id, theme);
         }
         if (themes.length) {
-            // @ts-ignore
             this.instance.emit('changed');
         }
     }
@@ -69,7 +66,6 @@ export class Themes {
         App.resetCss();
         App.applyCss('.css/global.css');
         App.applyCss(this.getStylesheet());
-        // @ts-ignore
         this.instance.emit('changed');
 
         writeFile(id, '.theme.txt');

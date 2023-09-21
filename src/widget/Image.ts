@@ -1,6 +1,6 @@
-import { Box, Icon, IconClass } from "eags";
 import { dcc } from "../Utils";
 import { testPathCache, testPaths } from "../FileIndex";
+import { Box, Icon, IconArgs } from "resource:///com/github/Aylur/ags/widget.js";
 
 export type Props = {
     className?: string
@@ -9,7 +9,7 @@ export type Props = {
     loadingSrc?: string
     errorSrc?: string
     alwaysCheckAgain?: boolean
-    props?: Partial<IconClass>
+    props?: Partial<IconArgs>
 } & (
     {
         stylable?: false
@@ -37,8 +37,6 @@ export const Image = (props: Props) => {
         if (props.stylable) {
             box.children = [
                 Box({
-                    ...props.props,
-                    // @ts-ignore
                     style: `background: url("${src}"); min-width: ${props.size[0]}px; min-height: ${props.size[1]}px; background-size: 100% 100%`,
                     className: 'E-Image-icon' + dcc(props.iconClassName)
                 })

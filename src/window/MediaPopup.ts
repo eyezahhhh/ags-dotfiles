@@ -1,13 +1,11 @@
-import { Box, Button, CenterBox, EventBox, Icon, Label, Revealer, RevealerClass, Widget, Window } from "eags";
 import { SimpleButton } from "../widget/SimpleButton";
-// @ts-ignore
 import Mpris from 'resource:///com/github/Aylur/ags/service/mpris.js';
 import { convertArtists } from "../widget/MediaPlayer";
 import { NextButton, PlayPauseButton, Player, PreviousButton } from "../widget/MediaComponents";
 import { convertImage } from "../Utils";
 import { Image } from "../widget/Image";
-// @ts-ignore
 import { lookUpIcon } from 'resource:///com/github/Aylur/ags/utils.js';
+import { Box, Button, CenterBox, EventBox, Icon, Label, Revealer, RevealerType, Window } from "resource:///com/github/Aylur/ags/widget.js";
 
 export type MediaApp = {
     icon: string
@@ -20,13 +18,12 @@ export interface Props {
     apps?: MediaApp[]
 }
 
-function build(player: Player, open: boolean, openCallback: (open: boolean) => void): [RevealerClass, RevealerClass] {
+function build(player: Player, open: boolean, openCallback: (open: boolean) => void): [RevealerType, RevealerType] {
     const blurArgs = ['-blur', '0x05', '-brightness-contrast', '-50'];
     let destroyed = false;
 
     const extra = Revealer({
         transition: 'slide_down',
-        // @ts-ignore
         revealChild: open,
         child: Box({
             className: 'E-MediaPopup-extra',
@@ -42,7 +39,6 @@ function build(player: Player, open: boolean, openCallback: (open: boolean) => v
                                         Label({
                                             halign: 'start',
                                             className: 'E-MediaPopup-extra-title',
-                                            // @ts-ignore
                                             wrap: true,
                                             connections: [
                                                 [player, label => {
@@ -53,7 +49,6 @@ function build(player: Player, open: boolean, openCallback: (open: boolean) => v
                                         Label({
                                             halign: 'start',
                                             className: 'E-MediaPopup-extra-artist',
-                                            // @ts-ignore
                                             wrap: true,
                                             connections: [
                                                 [player, label => {
@@ -123,9 +118,7 @@ function build(player: Player, open: boolean, openCallback: (open: boolean) => v
                     props: {
                         className: 'E-MediaPopup-close',
                         onClicked: () => {
-                            // @ts-ignore
                             extra.revealChild = false;
-                            // @ts-ignore
                             peek.revealChild = true;
                             openCallback(false);
                         }
@@ -137,7 +130,6 @@ function build(player: Player, open: boolean, openCallback: (open: boolean) => v
                     if (player.coverPath) {
                         convertImage(player.coverPath, ...blurArgs).then(path => {
                             if (path && !destroyed) {
-                                // @ts-ignore
                                 box.style = `background-image: url("${path}")`;
                             }
                         });
@@ -173,14 +165,11 @@ function build(player: Player, open: boolean, openCallback: (open: boolean) => v
                 ]
             }),
             onPrimaryClick: () => {
-                // @ts-ignore
                 extra.revealChild = true;
-                // @ts-ignore
                 peek.revealChild = false;
                 openCallback(true);
             }
         }),
-        // @ts-ignore
         revealChild: !open
     });
 

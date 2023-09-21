@@ -1,6 +1,4 @@
-// @ts-ignore
 import { Service } from 'resource:///com/github/Aylur/ags/service.js';
-// @ts-ignore
 import { execAsync } from 'resource:///com/github/Aylur/ags/utils.js';
 import { wait } from '../Utils';
 
@@ -101,7 +99,6 @@ class VirshService extends Service {
         }
         
         if (changed) {
-            // @ts-ignore
             this.emit('changed');
         }
     }
@@ -109,6 +106,7 @@ class VirshService extends Service {
 
 export class Virsh {
     static {
+        // @ts-expect-error
         Service['Virsh'] = this;
     }
 
