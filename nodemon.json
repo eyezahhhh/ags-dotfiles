@@ -1,5 +1,0 @@
-{
-    "watch": ["dist", "**/*.scss", ".env", "scripts/*"],
-    "ignore": [".css/*"],
-    "exec": "npm run start"
-}
