@@ -58,7 +58,9 @@
         }
 
         &.E-HyprlandWorkspaces-active {
-            color: $foreground-accent;
+            label {
+                color: $foreground-accent;
+            }
 
             &:hover {
                 color: $foreground-accent;
@@ -89,19 +91,18 @@
 
 
 .E-VirtualMachines {
-    background: $background;
-    padding: 5px;
-    border: $border-md solid $foreground-accent;
-    border-radius: $radius-lg;
-
     .E-VirtualMachine {
-        margin: 5px;
+        margin-top: 10px;
     }
 
     .E-VirtualMachines-notice {
         margin: 5px 10px;
         font-size: 1.2rem;
         color: $foreground;
+    }
+
+    .E-VirtualMachines-volume > * > * {
+        margin-right: 10px;
     }
 }
 
@@ -153,6 +154,7 @@
 
     .E-Scale-scale {
         min-width: 60px;
+        margin: -5px 0;
 
         contents {
             trough {
@@ -197,11 +199,8 @@
 
 
 .E-VolumeSliders {
-    background: $background;
-    padding: 10px;
-    border: $border-md solid $foreground-accent;
-    border-radius: $radius-lg;
-
+    min-width: 200px;
+    
     .E-VolumeSliders-label {
         margin-left: 0.5rem;
     }
@@ -209,7 +208,6 @@
     .E-VolumeSliders-notice {
         margin: 0 5px;
         font-size: 1.2rem;
-        color: $foreground;
     }
 }
 
@@ -227,12 +225,14 @@
 
 
 .E-PowerPopup {
-
     .E-LargeButton {
-
         &:focus {
             background: $foreground-accent;
             color: $background;
+
+            label {
+                color: $foreground-focus;
+            }
         }
     }
 }
@@ -347,14 +347,10 @@
 
 
 .E-ThemeSelector {
-    background: $background;
-    padding: 10px;
-    border: $border-md solid $foreground-accent;
-    border-radius: $radius-lg;
-
     .E-ThemeSelector-theme {
         border-radius: $radius-sm;
         border: $border-sm solid transparent;
+        transition: border-color 0.15s;
 
         &:focus, &:hover {
             border-color: $foreground-accent;
@@ -366,7 +362,13 @@
 
         .E-ThemeSelector-label {
             padding: 5px 10px;
-            color: $foreground;
+            transition: color 0.15s;
+        }
+
+        &:hover {
+            .E-ThemeSelector-label {
+                color: $foreground-focus;
+            }
         }
     }
 }
@@ -485,6 +487,36 @@
 
         &:hover, &:active, &:focus {
             border: $border-sm solid $foreground-accent;
+        }
+    }
+}
+
+
+
+.E-ControlPanel {
+    background: transparent;
+    
+    .E-ControlPanel-inner {
+        background: transparent;
+
+        .E-ControlPanel-section {
+            padding: 10px;
+            background: $background;
+            margin: 5px;
+            border-radius: $radius-lg;
+
+            &.E-ControlPanel-clock {
+                min-width: 200px;
+
+                .E-ControlPanel-clock-time {
+                    font-size: calc(3rem * $font-monospace-size-multiplier);
+                    font-family: $font-monospace;
+                }
+
+                .E-ControlPanel-clock-date {
+                    font-size: 1.3rem;
+                }
+            }
         }
     }
 }

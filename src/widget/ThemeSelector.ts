@@ -7,8 +7,8 @@ export interface Props {
 
 export const ThemeSelector = (props: Props = {}) => Box({
     vertical: true,
-    halign: 'end',
     className: 'E-ThemeSelector',
+    hexpand: true,
     connections: [
         [Themes, box => {
             const themes = Array.from(Themes.themes.values());
@@ -17,7 +17,6 @@ export const ThemeSelector = (props: Props = {}) => Box({
                 child: Label({
                     className: 'E-ThemeSelector-label',
                     label: theme.name,
-                    halign: 'start'
                 }),
                 onPrimaryClick: async () => {
                     Themes.setTheme(theme.id);

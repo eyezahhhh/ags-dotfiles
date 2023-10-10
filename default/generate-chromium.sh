@@ -2,7 +2,7 @@
 
 . ~/.cache/wal/colors.sh # import colors from pywal
 
-THEME_NAME="../.chrome-pywal"
+THEME_NAME="../chrome-pywal"
 
 
 DIR=$(dirname "${BASH_SOURCE[0]}")
@@ -33,7 +33,7 @@ prepare() {
 
 background=$(hexToRgb $background)
 foreground=$(hexToRgb $foreground)
-accent=$(hexToRgb $color11)
+accent=$(hexToRgb $color9)
 secondary=$(hexToRgb $color8)
 
 generate() {
@@ -44,9 +44,6 @@ generate() {
       "version": "1.0",
       "name": "$THEME_NAME Theme",
       "theme": {
-        "images": {
-          "theme_ntp_background" : "$background_image"
-        },
         "colors": {
           "frame": [$background],
           "frame_inactive": [$background],

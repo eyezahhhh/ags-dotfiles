@@ -235,6 +235,10 @@ declare module 'resource:///com/github/Aylur/ags/service/hyprland.js' {
     workspaces: Map<number, Workspace>;
     clients: Map<string, Client>;
 
+    getMonitor(id: number): Monitor;
+    getWorkspace(id: number): Workspace;
+    getClient(address: string): Client;
+
     HyprctlGet(cmd: 'monitors'): Monitor[];
     HyprctlGet(cmd: 'workspaces'): Workspace[];
     HyprctlGet(cmd: 'activeworkspace'): Workspace;
@@ -568,6 +572,7 @@ declare module 'resource:///com/github/Aylur/ags/widget.js' {
   type RevealerTransition = 'none' | 'crossfade' | 'slide_left' | 'slide_right' | 'slide_down' | 'slide_up';
   interface RevealerArgs extends CommonArgs<RevealerType> {
     child: Widget;
+    transitionDuration: number;
     transition: RevealerTransition;
     revealChild: boolean
   }

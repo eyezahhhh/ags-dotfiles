@@ -39,7 +39,7 @@ export const HyprlandWorkspaces = (props: Props = {}) => Box({
         [Hyprland, box => {
             const numbers = Array.from({ length: 10 }, (_, i) => i + 1);
             box.children = numbers.map(i => {
-                const populated = !!Hyprland.workspaces.get(i);
+                const populated = !!Hyprland.getWorkspace(i);
                 const active = Hyprland.active.workspace.id == i;
 
                 const contents = props.buttonContents ? props.buttonContents({

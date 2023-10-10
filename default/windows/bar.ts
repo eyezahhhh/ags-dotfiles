@@ -25,7 +25,7 @@ const mainBar = Window({
             halign: 'end',
             className: 'E-EventBox',
             onPrimaryClick: () => {
-                App.toggleWindow('E-StartMenu-0')
+                App.openWindow('E-ControlPanel')
             }
         }) 
     })

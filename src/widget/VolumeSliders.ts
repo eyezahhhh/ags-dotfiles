@@ -10,6 +10,7 @@ export interface Props {
     labelClassName?: string
     childProps?: Partial<SliderProps>,
     filter?: (stream: AudioStream) => boolean
+    name?: (name: string) => string
 }
 
 export const VolumeSliders = (props: Props = {}) => Box({
@@ -30,7 +31,7 @@ export const VolumeSliders = (props: Props = {}) => Box({
                         Label({
                             halign: 'start',
                             className: 'E-VolumeSliders-label' + dcc(props.labelClassName),
-                            label: s.name
+                            label: props.name ? props.name(s.name) : s.description || s.name
                         }),
                         VolumeSlider(s, props.childProps)
                     ]
@@ -39,7 +40,8 @@ export const VolumeSliders = (props: Props = {}) => Box({
                 box.children = [
                     Label({
                         label: `No ${props.audioType || 'speakers'} found.`,
-                        className: 'E-VolumeSliders-notice'
+                        className: 'E-VolumeSliders-notice',
+                        hexpand: true
                     })
                 ]
             }

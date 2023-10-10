@@ -7,7 +7,8 @@ const __dirname = exec("pwd");
 export class Theme {
     id: string
     name: string
-    stylesheets: string[]
+    scss: string[]
+    css: string[]
 }
 
 export class ThemesService extends Service {
@@ -32,15 +33,15 @@ export class Themes {
         return this.instance.themes;
     }
 
-    static addThemes(...themes: Theme[]) {
+    static addThemes(...themes: Omit<Theme, "css">[]) {
         for (let theme of themes) {
-            if (theme.id.startsWith('.')) {
-                throw 'Theme IDs cannot start with \'.\'';
+            if (theme.id.includes('.')) {
+                throw 'Theme IDs cannot include \'.\'';
             }
-            if (theme.id == 'global') {
-                throw 'Theme ID cannot be \'global\'';
-            }
-            this.instance.themes.set(theme.id, theme);
+            this.instance.themes.set(theme.id, {
+                ...theme,
+                css: theme.scss.map((_, i) => `${__dirname}/.css/${theme.id}.${i}.css`)
+            });
         }
         if (themes.length) {
             this.instance.emit('changed');
@@ -51,11 +52,11 @@ export class Themes {
         await execAsync('node scripts/clear-temp-css.js');
 
         let sheetCount = 0;
-        for (let filename of theme.stylesheets) {
-            await execAsync(`npx sass --no-source-map ${filename} ${__dirname}/.css/.${sheetCount++}.css`);
+        for (let [index, filename] of theme.scss.entries()) {
+            await execAsync(`npx sass --no-source-map ${filename} ${theme.css[index]}`);
         }
-        await execAsync(`node scripts/transpile-scss.js ${theme.id}`);
     }
+    
 
     static setTheme(id: string) {
         const theme = this.instance.themes.get(id);
@@ -63,22 +64,26 @@ export class Themes {
             throw 'Theme doesn\'t exist';
         }
         this.current = id;
-        App.resetCss();
-        App.applyCss('.css/global.css');
-        console.log('Applying css...');
-        try {
-            App.applyCss(this.getStylesheet());
-        } catch (e) {
-            console.error(e);
-        }
+        this.reloadCss();
         
         this.instance.emit('changed');
         writeFile(id, '.theme.txt');
 
-
-
         for (let listener of this.listeners) {
             listener(theme);
+        }
+    }
+
+    static reloadCss() {
+        App.resetCss();
+        console.log('Applying css...');
+        const theme = this.themes.get(this.current)!;
+        try {
+            for (let css of theme.css) {
+                App.applyCss(css);
+            }
+        } catch (e) {
+            console.error(e);
         }
     }
 
@@ -97,10 +102,6 @@ export class Themes {
         return this.themes.get(this.current) || null;
     }
 
-    static getStylesheet() {
-        return `${__dirname}/.css/${this.current}.css`;
-    }
-
     static onChange(callback: (theme: Theme) => void) {
         if (!this.listeners.includes(callback)) {
             this.listeners.push(callback);
@@ -113,4 +114,13 @@ export class Themes {
             }
         }
     }
+}
+
+// @ts-expect-error
+globalThis.reloadCss = () => Themes.reloadCss();
+
+// @ts-expect-error
+globalThis.getThemes = () => {
+    const themes = Array.from(Themes.themes.values());
+    return JSON.stringify(themes, null, 2);
 }

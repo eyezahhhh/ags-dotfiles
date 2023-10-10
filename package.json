@@ -9,7 +9,9 @@
     "start": "node scripts/start.js",
     "tsc-alias": "npx tsc scripts/replacer.ts --module commonjs --target es2017 && npx tsc-alias",
     "dev": "npm run build && npx tsc-watch --onSuccess \"npx nodemon\"",
-    "dev:end": "npx tsc-alias && npm run start"
+    "dev:end": "npx tsc-alias && npm run start",
+    "watch:sass": "node scripts/watch-sass.js",
+    "watch:gtk": "npx sass -w default/gtk.scss /home/eyezah/.themes/sakura/gtk-3.0/gtk.css"
   },
   "author": "eyezah",
   "license": "MIT",

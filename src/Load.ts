@@ -7,7 +7,7 @@ const __dirname = exec("pwd");
 
 export class Loader {
     private windows: WindowType[] = [];
-    private stylesheets = 0;
+    private stylesheets: string[] = [];
     private readonly windowDelays: {[name: string]: number} = {};
     private notificationPopupTimeout = 5000;
     private readonly showOnLoad: WindowType[] = [];
@@ -15,13 +15,6 @@ export class Loader {
     constructor() {
         exec(`rm -rf ${__dirname}/.css`);
         exec(`mkdir ${__dirname}/.css`);
-    }
-
-    loadGlobalSass(...filenames: string[]) {
-        for (let filename of filenames) {
-            const cmd = `npx sass --no-source-map ${filename} ${__dirname}/.css/.${this.stylesheets++}.css`;
-            exec(cmd);
-        }
     }
 
     loadWindows(show: boolean, ...windows: WindowType[]) {
@@ -60,10 +53,6 @@ export class Loader {
 
     getNotificationPopupTimeout() {
         return this.notificationPopupTimeout;
-    }
-
-    async compileGlobalStylesheets() {
-        await exec('node scripts/transpile-scss.js global');
     }
 
     showWindows() {
@@ -105,7 +94,7 @@ for (let entrypoint of entrypoints) {
 
 
 console.log('Compiling stylesheets...');
-await loader.compileGlobalStylesheets();
+
 const themes = Array.from(Themes.themes.values());
 for (let theme of themes) {
     await Themes.compileStylesheets(theme);
@@ -120,7 +109,6 @@ for (let window of windows) {
 }
 
 export default {
-    style: './.css/global.css',
     windows: windows,
     closeWindowDelay: loader.getWindowCloseDelays(),
     notificationPopupTimeout: loader.getNotificationPopupTimeout()

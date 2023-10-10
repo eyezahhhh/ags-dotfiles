@@ -23,6 +23,7 @@ export const Popup = (props: Props) => {
         ...props.props,
         monitor: props.monitor,
         name: name,
+        layer: 'overlay',
         className: 'E-Popup' + dcc(props.props?.className),
         child: Box({
             className: 'E-Popup-outer',

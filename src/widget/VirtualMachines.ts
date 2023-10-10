@@ -85,6 +85,7 @@ export const VirtualMachines = (props: Props = {}) => {
     }
 
     const volume = props.volumeStreamCriteria ? Box({
+        className: 'E-VirtualMachines-volume',
         connections: [
             [Audio, box => {
                 const streams = Array.from(Audio.apps.values()) as AudioStream[];
