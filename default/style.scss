@@ -352,22 +352,13 @@
         border: $border-sm solid transparent;
         transition: border-color 0.15s;
 
-        &:focus, &:hover {
-            border-color: $foreground-accent;
-        }
-
-        &:active {
-            background: $foreground-accent;
-        }
-
         .E-ThemeSelector-label {
-            padding: 5px 10px;
             transition: color 0.15s;
         }
 
         &:hover {
             .E-ThemeSelector-label {
-                color: $foreground-focus;
+                color: $foreground-accent;
             }
         }
     }
@@ -505,7 +496,7 @@
             margin: 5px;
             border-radius: $radius-lg;
 
-            &.E-ControlPanel-clock {
+            .E-ControlPanel-clock {
                 min-width: 200px;
 
                 .E-ControlPanel-clock-time {
@@ -517,6 +508,31 @@
                     font-size: 1.3rem;
                 }
             }
+        }
+    }
+}
+
+
+
+.E-AvReceiver {
+    .E-AvReceiver-power {
+        min-width: 25px;
+        &.E-AvReceiver-power-on {
+            color: $foreground-accent;
+        }
+    }
+
+    .E-AvReceiver-dimmer {
+        min-width: 25px;
+        &.E-AvReceiver-dimmer-on {
+            color: $foreground-accent;
+        }
+    }
+
+    .E-AvReceiver-input {
+        min-height: 22px;
+        &.E-AvReceiver-input-selected {
+            color: $foreground-accent;
         }
     }
 }

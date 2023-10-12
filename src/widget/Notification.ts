@@ -53,7 +53,9 @@ export const Notification = (notification: AgsNotification, props: Props = {}) =
                                     label: action.label
                                 }),
                                 className: 'E-Button',
-                                onClicked: () => Notifications.invoke(notification.id, action.action)
+                                onClicked: () => {
+                                    Notifications.invoke(notification.id, action.id)
+                                }
                             }))
                         })
                     ]

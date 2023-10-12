@@ -3,6 +3,7 @@ import { AudioStream, VolumeSlider } from "./VolumeSlider";
 import { Props as SliderProps } from './Scale';
 import { cc, dcc } from "../Utils";
 import { Box, Label } from 'resource:///com/github/Aylur/ags/widget.js';
+import { CustomVolumeSlider, Props as CustomProps } from './CustomVolumeSlider';
 
 export interface Props {
     audioType?: 'speakers' | 'microphones' | 'apps'
@@ -11,6 +12,7 @@ export interface Props {
     childProps?: Partial<SliderProps>,
     filter?: (stream: AudioStream) => boolean
     name?: (name: string) => string
+    customSliders?: CustomProps[]
 }
 
 export const VolumeSliders = (props: Props = {}) => Box({
@@ -24,18 +26,31 @@ export const VolumeSliders = (props: Props = {}) => Box({
             }
             box.children?.forEach(c => c?.destroy());
 
-            if (streams.length) {
-                box.children = streams.map(s => Box({
-                    vertical: true,
-                    children: [
-                        Label({
-                            halign: 'start',
-                            className: 'E-VolumeSliders-label' + dcc(props.labelClassName),
-                            label: props.name ? props.name(s.name) : s.description || s.name
-                        }),
-                        VolumeSlider(s, props.childProps)
-                    ]
-                }));
+            if (streams.length + (props.customSliders?.length || 0)) {
+                box.children = [
+                    ...(props.customSliders || []).map(customProps => Box({
+                        vertical: true,
+                        children: [
+                            Label({
+                                halign: 'start',
+                                className: 'E-VolumeSliders-label' + dcc(props.labelClassName),
+                                label: customProps.name
+                            }),
+                            CustomVolumeSlider(customProps)
+                        ]
+                    })),
+                    ...streams.map(s => Box({
+                        vertical: true,
+                        children: [
+                            Label({
+                                halign: 'start',
+                                className: 'E-VolumeSliders-label' + dcc(props.labelClassName),
+                                label: props.name ? props.name(s.name) : s.description || s.name
+                            }),
+                            VolumeSlider(s, props.childProps)
+                        ]
+                    }))
+                ];
             } else {
                 box.children = [
                     Label({

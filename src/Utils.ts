@@ -97,3 +97,32 @@ export function getLoggedInUser() {
         return parts[2];
     }
 }
+
+export function debounce<T, R>(timer: number, callback: (value: T) => R | Promise<R>) {
+    let timeout: NodeJS.Timeout;
+
+    const callbacks: [(response: R) => void, (error: any) => void][] = [];
+
+    return (value: T) => {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(async () => {
+            try {
+                const response = await callback(value);
+                for (let callback of callbacks) {
+                    callback[0](response);
+                }
+            } catch (e) {
+                for (let callback of callbacks) {
+                    callback[1](e);
+                }
+            }
+            
+        }, timer);
+
+        return new Promise<R>((resolve, reject) => {
+            callbacks.push([resolve, reject]);
+        });
+    }
+}

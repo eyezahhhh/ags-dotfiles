@@ -367,7 +367,7 @@ declare module 'resource:///com/github/Aylur/ags/service/notifications.js' {
     appIcon: string;
     summary: string;
     body: string;
-    actions: { action: string; label: string }[];
+    actions: { id: string; label: string }[];
     urgency: Urgency;
     time: number;
     image: string | null;

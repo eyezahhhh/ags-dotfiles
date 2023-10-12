@@ -1,5 +1,5 @@
 
-import { Box, EventBox, EventBoxArgs, Label, Slider } from "resource:///com/github/Aylur/ags/widget.js";
+import { Box, Connection, EventBox, EventBoxArgs, Label, LabelType, Slider, SliderType } from "resource:///com/github/Aylur/ags/widget.js";
 import { cc, dcc } from "../Utils";
 
 export interface Props {
@@ -17,6 +17,8 @@ export interface Props {
     props?: Partial<EventBoxArgs>
     min?: number
     max?: number
+    connections?: Connection<SliderType>[],
+    labelConnections?: Connection<LabelType>[]
 }
 
 export const Scale = (props: Props) => {
@@ -29,7 +31,8 @@ export const Scale = (props: Props) => {
 
     const label = props.showLabel !== false ? Label({
         label: getLabel(props.initialValue),
-        className: 'E-Scale-label' + dcc(props.labelClassName)
+        className: 'E-Scale-label' + dcc(props.labelClassName),
+        connections: props.labelConnections
     }) : null;
 
     const slider = Slider({
@@ -42,6 +45,7 @@ export const Scale = (props: Props) => {
         vertical: !!props.vertical,
         className: 'E-Scale-scale' + cc(props.vertical, 'E-Scale-vertical') + dcc(props.scaleClassName),
         inverted: !!props.vertical,
+        connections: props.connections,
         onChange: ({value}: {value: number}) => {
             if (props.onChange) {
                 let newValue = props.onChange(value);

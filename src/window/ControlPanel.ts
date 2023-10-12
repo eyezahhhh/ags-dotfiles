@@ -1,12 +1,9 @@
 import app from "resource:///com/github/Aylur/ags/app.js";
-import { Box, BoxArgs, BoxType, EventBox, Label, Window } from "resource:///com/github/Aylur/ags/widget.js"
+import { Box, BoxArgs, BoxType, Connection, EventBox, EventBoxArgs, EventBoxType, Label, Window, WindowType } from "resource:///com/github/Aylur/ags/widget.js"
 import { dcc } from "../Utils";
 import { SmoothRevealer } from "../widget/SmoothRevealer";
 
-export const PanelSection = (props: Partial<BoxArgs>) => Box({
-    ...props,
-    className: 'E-ControlPanel-section' + dcc(props.className)
-});
+export const PanelSection = (props: Partial<EventBoxArgs>) => EventBox(props);
 
 
 class Section {
@@ -22,6 +19,8 @@ export class Column extends Section {}
 export interface Props {
     layout: Section
     monitor: number
+    // @ts-expect-error
+    connections?: Connection<WindowType>[]
 }
 
 export const ControlPanel = (props: Props) => {
@@ -41,7 +40,7 @@ export const ControlPanel = (props: Props) => {
             parent = parent.children[container] as Section;
             parentBox = parentBox.children[container] as BoxType;
         }
-        const component = parent.children[lastBit];
+        const component = parent.children[lastBit] as Section | EventBoxType;
         if (component instanceof Section) {
             const newChildren = [...parentBox.children];
             newChildren[lastBit] = Box({
@@ -51,7 +50,13 @@ export const ControlPanel = (props: Props) => {
             toScan.push(...component.children.map((_, i) => [...fullPath, i]));
         } else {
             const newChildren = [...parentBox.children];
-            newChildren[lastBit] = component;
+            component.onPrimaryClick = () => {
+                lastClick = Date.now();
+            }
+            newChildren[lastBit] = Box({
+                className: 'E-ControlPanel-section',
+                children: [ component ]
+            });
             parentBox.children = newChildren;
         }
     }
@@ -60,12 +65,7 @@ export const ControlPanel = (props: Props) => {
 
     const revealer = SmoothRevealer({
         spacerHeight: 500,
-        child: EventBox({
-            onPrimaryClick: () => {
-                lastClick = Date.now();
-            },
-            child: layout
-        }),
+        child: layout
     });
 
     return Window({
@@ -99,7 +99,8 @@ export const ControlPanel = (props: Props) => {
                 if (windowName == window.name) {
                     revealer.setVisible(visible);
                 }
-            }]
+            }],
+            ...props.connections || []
         ]
     });
 }
