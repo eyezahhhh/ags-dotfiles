@@ -117,19 +117,19 @@ const outVolume = PanelSection({
                 initialValue: 50,
                 name: "Amplifier",
                 onChange: value => {
-                    const adjustedValue = Math.round(Math.sqrt(value / 100) * 100);
+                    const adjustedValue = Math.round(Math.sqrt(value / 200) * 200);
                     Avr.setVolume(adjustedValue);
                     return value;
                 },
                 connections: [
                     [Avr, slider => {
-                        const adjusted = Math.round(Math.min(Math.max((Avr.getStatus().volume / 100) ** 2 * 100, 0), 100));
+                        const adjusted = Math.round(Math.min(Math.max((Avr.getStatus().volume / 200) ** 2 * 200, 0), 200));
                         slider.value = adjusted;
                     }]
                 ],
                 labelConnections: [
                     [Avr, label => {
-                        const adjusted = Math.round(Math.min(Math.max((Avr.getStatus().volume / 100) ** 2 * 100, 0), 100));
+                        const adjusted = Math.round(Math.min(Math.max((Avr.getStatus().volume / 200) ** 2 * 200, 0), 200));
                         label.label = `${adjusted}%`;
                     }]
                 ]
@@ -147,6 +147,7 @@ const inVolume = PanelSection({
     })
 });
 
+Avr.setAddress("http://home-automata/avr");
 const amp = PanelSection({
     child: AvReceiver({
         inputs: {
@@ -154,9 +155,10 @@ const amp = PanelSection({
             'hdmi-2': 'HDMI 2',
             'hdmi-3': 'HDMI 3',
             'hdmi-4': 'HDMI 4',
-            'hdmi-5': 'HDMI 5',
+            'hdmi-5': 'DJ',
             'hdmi-6': 'HDMI 6',
             'hdmi-7': 'Aux HDMI',
+            'pc': 'PC',
             'phono': 'Phono',
             'fm': 'FM',
             'am': 'AM',

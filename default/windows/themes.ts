@@ -16,7 +16,7 @@ Themes.onChange(theme => {
         writeFile(contents, `/home/${getLoggedInUser()}/.config/hypr/theme.conf`);
     });
 
-    exec(`wal -f ${themeDir}/theme-1.json`);
+    exec(`wal -f ${themeDir}/theme.json`);
     exec(`pywalfox update`);
     exec(`./default/generate-chromium.sh`);
 });

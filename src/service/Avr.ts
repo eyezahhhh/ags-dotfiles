@@ -10,6 +10,7 @@ export type AvrInput = (
     "hdmi-5" |
     "hdmi-6" |
     "hdmi-7" |
+    "pc" |
     "phono" |
     "am" |
     "fm" |
